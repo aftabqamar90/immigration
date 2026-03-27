@@ -3,29 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ImmigAI.pk — Investor Intelligence Dashboard v3</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Mono:wght@400;700&family=Fraunces:ital,wght@0,300;0,700;0,900;1,300&display=swap" rel="stylesheet">
+<title>ImmigAI.pk — Investor Intelligence Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Fraunces:ital,wght@0,300;0,700;0,900;1,300&display=swap" rel="stylesheet">
 <style>
 :root{
   --ink:#0b0b12;--paper:#f3efe4;--mist:#e8e3d6;--gold:#c8921a;
   --gold-lt:#e8c96a;--em:#14623e;--em-lt:#22995f;--cr:#7d1919;
   --cr-lt:#bb3232;--sl:#1e2130;--sl-mid:#3c4058;
-  --blue:#10305e;--teal:#0b5858;--grid:rgba(11,11,18,.055);
+  --blue:#10305e;--teal:#0b5858;--grid:rgba(11,11,18,.05);
   --white:#faf7f0;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'Space Mono',monospace;background:var(--paper);color:var(--ink);overflow-x:hidden;
-  background-image:repeating-linear-gradient(0deg,var(--grid) 0,var(--grid) 1px,transparent 1px,transparent 52px),
-  repeating-linear-gradient(90deg,var(--grid) 0,var(--grid) 1px,transparent 1px,transparent 52px)}
+body{
+  font-family:'Space Mono',monospace;background:var(--paper);color:var(--ink);overflow-x:hidden;
+  background-image:
+    repeating-linear-gradient(0deg,var(--grid) 0,var(--grid) 1px,transparent 1px,transparent 52px),
+    repeating-linear-gradient(90deg,var(--grid) 0,var(--grid) 1px,transparent 1px,transparent 52px);
+}
 
-/* NAV */
+/* ── SIDE NAV ── */
 .snav{position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:300;display:flex;flex-direction:column;border-right:1px solid rgba(11,11,18,.12)}
-.snav a{writing-mode:vertical-rl;transform:rotate(180deg);font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;padding:.95rem .75rem;color:var(--sl-mid);text-decoration:none;background:var(--paper);border-bottom:1px solid rgba(11,11,18,.07);white-space:nowrap;transition:all .2s}
+.snav a{writing-mode:vertical-rl;transform:rotate(180deg);font-size:.5rem;letter-spacing:.16em;text-transform:uppercase;padding:.9rem .7rem;color:var(--sl-mid);text-decoration:none;background:var(--paper);border-bottom:1px solid rgba(11,11,18,.07);white-space:nowrap;transition:all .2s}
 .snav a:hover,.snav a.on{background:var(--ink);color:var(--gold)}
 @media(max-width:900px){.snav{display:none}}
 
-/* HERO */
+/* ── HERO ── */
 .hero{min-height:100vh;background:var(--sl);color:var(--paper);position:relative;overflow:hidden;display:grid;grid-template-rows:auto 1fr}
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 65% 50% at 68% 22%,rgba(200,146,26,.17),transparent 65%),radial-gradient(ellipse 40% 55% at 5% 88%,rgba(20,98,62,.19),transparent 60%);pointer-events:none}
 .hero-nav{display:flex;align-items:center;justify-content:space-between;padding:1.7rem 5rem;border-bottom:1px solid rgba(243,239,228,.08);position:relative;z-index:2}
@@ -39,11 +42,10 @@ h1{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(2.6rem,5.2vw,5re
 h1 em{font-style:italic;color:var(--gold)}
 .hero-sub{font-size:.82rem;font-weight:400;color:rgba(243,239,228,.58);max-width:540px;line-height:1.78;margin-bottom:2.5rem}
 
-/* CRITICAL DISCLAIMER BOX in hero */
-.disclaimer-hero{border:1px solid rgba(200,146,26,.45);background:rgba(200,146,26,.07);padding:1.2rem 1.8rem;max-width:720px;margin-bottom:2rem;display:flex;gap:1rem;align-items:flex-start}
-.disc-icon{font-size:1.3rem;flex-shrink:0;color:var(--gold-lt)}
-.disc-text{font-size:.74rem;line-height:1.65;color:rgba(243,239,228,.82);font-weight:400}
-.disc-text strong{color:var(--gold-lt)}
+.disc-hero{border:1px solid rgba(200,146,26,.45);background:rgba(200,146,26,.07);padding:1.2rem 1.8rem;max-width:720px;margin-bottom:2rem;display:flex;gap:1rem;align-items:flex-start}
+.dh-icon{font-size:1.3rem;flex-shrink:0;color:var(--gold-lt)}
+.dh-text{font-size:.74rem;line-height:1.65;color:rgba(243,239,228,.82);font-weight:400}
+.dh-text strong{color:var(--gold-lt)}
 
 .kpis{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid rgba(243,239,228,.1)}
 .kpi{padding:1.5rem 1.6rem;border-right:1px solid rgba(243,239,228,.1);animation:fadeUp .52s ease forwards;opacity:0}
@@ -51,10 +53,16 @@ h1 em{font-style:italic;color:var(--gold)}
 .kpi:nth-child(1){animation-delay:.1s}.kpi:nth-child(2){animation-delay:.2s}.kpi:nth-child(3){animation-delay:.3s}.kpi:nth-child(4){animation-delay:.4s}.kpi:nth-child(5){animation-delay:.5s}
 .kn{font-family:'Fraunces',serif;font-weight:900;font-size:2rem;line-height:1;color:var(--gold)}
 .kn small{font-size:.9rem;font-weight:600}
-.kl{font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(243,239,228,.42);margin-top:.38rem}
+.kl{font-size:.57rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(243,239,228,.42);margin-top:.38rem}
 @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 
-/* SECTIONS */
+/* ── TOP WARNING STRIP ── */
+.warn-strip{background:#1a0808;color:var(--paper);padding:2rem 5rem;border-bottom:2px solid var(--cr-lt);display:flex;gap:1.5rem;align-items:flex-start}
+.ws-ic{font-size:1.8rem;flex-shrink:0;color:var(--cr-lt);margin-top:.1rem}
+.ws-body h3{font-family:'Syne',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:var(--cr-lt);margin-bottom:.5rem}
+.ws-body p{font-size:.75rem;line-height:1.75;opacity:.88;font-weight:400}
+
+/* ── SECTIONS ── */
 .sec{padding:5rem 5rem;position:relative}
 .sec.alt{background:var(--mist)}
 .reveal{opacity:0;transform:translateY(26px);transition:all .62s cubic-bezier(.16,1,.3,1)}
@@ -65,24 +73,24 @@ h2{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(1.8rem,3.2vw,2.8
 h2 em{font-style:italic;color:var(--em)}
 .sint{font-size:.8rem;color:var(--sl-mid);max-width:640px;line-height:1.8;margin-bottom:2.6rem;font-weight:400}
 
-/* WHAT IS THE PLATFORM */
-.platform-def{background:var(--ink);color:var(--paper);padding:3rem;margin-bottom:2.5rem;border-left:4px solid var(--gold);position:relative}
-.platform-def::before{content:'WHAT YOUR PLATFORM DOES';position:absolute;top:-1px;left:3rem;background:var(--gold);color:var(--ink);font-family:'Syne',sans-serif;font-weight:700;font-size:.6rem;letter-spacing:.13em;padding:.25rem .85rem}
-.platform-def p{font-size:.85rem;line-height:1.85;font-weight:400;opacity:.88}
-.platform-def strong{color:var(--gold-lt)}
-.not-list{display:grid;grid-template-columns:1fr 1fr;gap:1.5px;margin-top:1.5rem}
-.not-item{padding:1.2rem 1.5rem;font-size:.77rem;line-height:1.55;display:flex;gap:.75rem;align-items:flex-start}
-.not-item.yes{background:rgba(20,98,62,.18);border-left:2px solid var(--em-lt)}
-.not-item.no{background:rgba(125,25,25,.18);border-left:2px solid var(--cr-lt)}
-.not-icon{font-size:1rem;flex-shrink:0;margin-top:.05rem}
+/* ── PLATFORM DEFINITION BOX ── */
+.pdef{background:var(--ink);color:var(--paper);padding:3rem;margin-bottom:2.5rem;border-left:4px solid var(--gold);position:relative}
+.pdef::before{content:'WHAT THIS PLATFORM DOES';position:absolute;top:-1px;left:3rem;background:var(--gold);color:var(--ink);font-family:'Syne',sans-serif;font-weight:700;font-size:.6rem;letter-spacing:.13em;padding:.25rem .85rem}
+.pdef p{font-size:.84rem;line-height:1.85;font-weight:400;opacity:.88}
+.pdef strong{color:var(--gold-lt)}
+.dos-donts{display:grid;grid-template-columns:1fr 1fr;gap:1.5px;margin-top:1.5rem}
+.dd{padding:1.2rem 1.5rem;font-size:.76rem;line-height:1.55;display:flex;gap:.75rem;align-items:flex-start}
+.dd.yes{background:rgba(20,98,62,.18);border-left:2px solid var(--em-lt)}
+.dd.no{background:rgba(125,25,25,.18);border-left:2px solid var(--cr-lt)}
+.dd-ic{font-size:1rem;flex-shrink:0;margin-top:.05rem}
 
-/* GRIDS */
-.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px}
-.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5px}
+/* ── GRIDS ── */
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:start}
 .g2a{display:grid;grid-template-columns:1fr 1.55fr;gap:4rem;align-items:start}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5px}
 
-/* CARDS */
+/* ── CARDS ── */
 .card{background:var(--ink);color:var(--paper);padding:2rem;position:relative;overflow:hidden;transition:transform .22s}
 .card:hover{transform:translateY(-3px)}
 .card.gold{background:var(--gold);color:var(--ink)}
@@ -99,7 +107,7 @@ h2 em{font-style:italic;color:var(--em)}
 .bnum{font-family:'Fraunces',serif;font-weight:900;font-size:2.6rem;line-height:1;margin-bottom:.4rem}
 .bnum small{font-size:1rem;font-weight:600}
 
-/* TABLE */
+/* ── TABLES ── */
 .tbl{width:100%;border-collapse:collapse;font-size:.74rem}
 .tbl th{text-align:left;padding:.8rem 1rem;background:var(--ink);color:var(--gold);font-family:'Syne',sans-serif;font-weight:600;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;border-bottom:2px solid var(--gold)}
 .tbl td{padding:.8rem 1rem;border-bottom:1px solid rgba(11,11,18,.07);vertical-align:top;line-height:1.52}
@@ -111,7 +119,7 @@ h2 em{font-style:italic;color:var(--em)}
 .bdg.b{background:rgba(16,48,94,.1);color:var(--blue)}
 .bdg.w{background:rgba(11,11,18,.08);color:var(--sl)}
 
-/* BARS */
+/* ── BAR CHARTS ── */
 .bars{display:flex;flex-direction:column;gap:.85rem}
 .brow{display:grid;grid-template-columns:160px 1fr 80px;align-items:center;gap:.85rem}
 .blbl{font-size:.7rem}
@@ -119,7 +127,18 @@ h2 em{font-style:italic;color:var(--em)}
 .bfil{height:100%;position:absolute;left:0;top:0;display:flex;align-items:center;padding-left:.6rem;font-size:.6rem;letter-spacing:.04em;color:rgba(243,239,228,.92);font-family:'Syne',sans-serif;font-weight:700;transition:width 1.3s cubic-bezier(.16,1,.3,1)}
 .bv{font-family:'Fraunces',serif;font-weight:900;font-size:.9rem;text-align:right}
 
-/* PRICING */
+/* ── USER FLOW ── */
+.flow{display:grid;grid-template-columns:repeat(6,1fr);gap:0;position:relative}
+.flow::before{content:'';position:absolute;top:1.9rem;left:8%;right:8%;height:1px;background:linear-gradient(to right,var(--gold),rgba(200,146,26,.2));z-index:0}
+.fstep{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 .8rem;position:relative;z-index:1}
+.fnum{width:40px;height:40px;border-radius:50%;background:var(--gold);color:var(--ink);font-family:'Syne',sans-serif;font-weight:800;font-size:.8rem;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;flex-shrink:0}
+.fstep.dim .fnum{background:rgba(11,11,18,.15);color:var(--sl-mid)}
+.ftitle{font-family:'Syne',sans-serif;font-weight:700;font-size:.7rem;margin-bottom:.4rem;line-height:1.3}
+.fdesc{font-size:.62rem;color:var(--sl-mid);line-height:1.55;font-weight:400}
+.fstep.dim .ftitle,.fstep.dim .fdesc{opacity:.55}
+.fnote{font-size:.58rem;font-style:italic;color:var(--cr-lt);margin-top:.35rem}
+
+/* ── PRICING ── */
 .pgrid{display:grid;grid-template-columns:repeat(4,1fr);border:1.5px solid var(--ink)}
 .ptier{padding:2rem 1.6rem;border-right:1.5px solid var(--ink);position:relative}
 .ptier:last-child{border-right:none}
@@ -136,7 +155,7 @@ h2 em{font-style:italic;color:var(--em)}
 .tfts li::before{content:'→';opacity:.42;flex-shrink:0}
 .trev{margin-top:1.2rem;padding:.6rem .85rem;background:rgba(200,146,26,.1);border-left:2px solid var(--gold);font-size:.65rem;line-height:1.55}
 
-/* TIMELINE */
+/* ── TIMELINE ── */
 .tlwrap{position:relative;padding-left:1.7rem}
 .tlwrap::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--gold),transparent)}
 .tlitem{position:relative;padding:0 0 2.6rem 2rem}
@@ -147,28 +166,20 @@ h2 em{font-style:italic;color:var(--em)}
 .ttgs{display:flex;gap:.42rem;flex-wrap:wrap;margin-top:.6rem}
 .ttg{font-size:.56rem;letter-spacing:.09em;text-transform:uppercase;padding:.2rem .55rem;background:rgba(11,11,18,.07);font-family:'Syne',sans-serif;font-weight:600}
 
-/* STAT BLOCK */
+/* ── STAT BLOCKS ── */
 .sb{padding:1.6rem;border:1px solid rgba(11,11,18,.1)}
 .sbn{font-family:'Fraunces',serif;font-weight:900;font-size:2rem;line-height:1}
 .sbs{font-size:.65rem;opacity:.5;margin-top:.32rem;line-height:1.4;font-weight:400}
 
-/* HIGHLIGHT */
+/* ── HIGHLIGHT BOX ── */
 .hbox{border:1px solid var(--gold);padding:1.6rem;background:rgba(200,146,26,.04);position:relative}
 .hbox::before{content:'★';position:absolute;top:-.62rem;left:1.2rem;background:var(--paper);padding:0 .42rem;color:var(--gold);font-size:.9rem}
-.alt .hbox::before{background:var(--mist)}
+.sec.alt .hbox::before{background:var(--mist)}
 
-/* PROCESS FLOW */
-.flow{display:grid;grid-template-columns:repeat(6,1fr);gap:0;position:relative}
-.flow::before{content:'';position:absolute;top:2rem;left:8%;right:8%;height:1px;background:linear-gradient(to right,var(--gold),rgba(200,146,26,.2));z-index:0}
-.fstep{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 .8rem;position:relative;z-index:1}
-.fnum{width:40px;height:40px;border-radius:50%;background:var(--gold);color:var(--ink);font-family:'Syne',sans-serif;font-weight:800;font-size:.8rem;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;flex-shrink:0}
-.fstep.disabled .fnum{background:rgba(11,11,18,.15);color:var(--sl-mid)}
-.ftitle{font-family:'Syne',sans-serif;font-weight:700;font-size:.7rem;margin-bottom:.4rem;line-height:1.3}
-.fdesc{font-size:.62rem;color:var(--sl-mid);line-height:1.55;font-weight:400}
-.fstep.disabled .ftitle{color:var(--sl-mid);opacity:.6}
-.fnote{font-size:.58rem;font-style:italic;color:var(--cr-lt);margin-top:.35rem}
+/* ── HR ── */
+hr.div{border:none;height:1px;background:linear-gradient(to right,var(--gold),transparent);margin:2.2rem 0}
 
-/* VERDICT */
+/* ── VERDICT ── */
 .verdict{background:var(--ink);color:var(--paper);padding:6.5rem 5rem;position:relative;overflow:hidden}
 .verdict::before{content:'VERDICT';position:absolute;right:-1.5rem;top:50%;transform:translateY(-50%);font-family:'Fraunces',serif;font-weight:900;font-size:15vw;color:rgba(200,146,26,.04);pointer-events:none;white-space:nowrap;line-height:1}
 .vgrid{display:grid;grid-template-columns:1fr 1.9fr;gap:5rem;align-items:start;position:relative;z-index:1}
@@ -194,33 +205,24 @@ h2 em{font-style:italic;color:var(--em)}
 .btn-s{background:transparent;color:var(--paper);font-family:'Syne',sans-serif;font-weight:700;font-size:.67rem;letter-spacing:.1em;text-transform:uppercase;padding:.85rem 1.7rem;border:1px solid rgba(243,239,228,.2);cursor:pointer;text-decoration:none;display:inline-block;transition:all .2s}
 .btn-s:hover{border-color:var(--gold);color:var(--gold)}
 
-/* PROMPT SECTION */
+/* ── PROMPT SECTION ── */
 .psec{background:#050508;color:var(--paper);padding:5rem}
-.pbox{background:rgba(243,239,228,.03);border:1px solid rgba(200,146,26,.22);padding:2.2rem;font-family:'Space Mono',monospace;position:relative;overflow:hidden}
+.pbox{background:rgba(243,239,228,.03);border:1px solid rgba(200,146,26,.22);padding:2.2rem;font-family:'Space Mono',monospace;position:relative}
 .pbox::before{content:'SYSTEM PROMPT — ImmigAI.pk AI Assessment Engine';position:absolute;top:-1px;left:2rem;background:var(--gold);color:var(--ink);font-family:'Syne',sans-serif;font-weight:700;font-size:.58rem;letter-spacing:.13em;padding:.24rem .85rem;white-space:nowrap}
 .pbox p{font-size:.74rem;line-height:1.9;font-weight:400;opacity:.88;margin-bottom:1rem}
 .pbox h4{font-family:'Syne',sans-serif;font-weight:700;font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin:1.6rem 0 .7rem;padding-bottom:.45rem;border-bottom:1px solid rgba(200,146,26,.18)}
 .pbox ul{list-style:none;padding-left:.9rem;margin-bottom:1rem}
 .pbox ul li{margin-bottom:.35rem;font-size:.7rem;font-weight:400;opacity:.85;line-height:1.55}
 .pbox ul li::before{content:'› ';color:var(--gold)}
-.pbox code{background:rgba(200,146,26,.12);color:var(--gold-lt);padding:.08rem .38rem;font-size:.7rem;font-family:'Space Mono',monospace}
-.pbox .section-divider{border:none;height:1px;background:rgba(200,146,26,.15);margin:1.8rem 0}
-.pbox .warning{background:rgba(125,25,25,.2);border-left:2px solid var(--cr-lt);padding:1rem;margin:1rem 0;font-size:.7rem;line-height:1.6}
-.pbox .warning strong{color:var(--cr-lt)}
+.pbox code{background:rgba(200,146,26,.12);color:var(--gold-lt);padding:.08rem .38rem;font-size:.7rem}
+.pbox .sdiv{border:none;height:1px;background:rgba(200,146,26,.15);margin:1.8rem 0}
+.pbox .warn{background:rgba(125,25,25,.2);border-left:2px solid var(--cr-lt);padding:1rem;margin:1rem 0;font-size:.7rem;line-height:1.6}
+.pbox .warn strong{color:var(--cr-lt)}
 
-/* HR */
-hr.div{border:none;height:1px;background:linear-gradient(to right,var(--gold),transparent);margin:2.2rem 0}
-
-/* FOOTER */
+/* ── FOOTER ── */
 footer{background:var(--ink);color:rgba(243,239,228,.35);padding:2.6rem 5rem;display:flex;justify-content:space-between;align-items:center;font-size:.64rem;line-height:1.6;border-top:1px solid rgba(243,239,228,.06)}
 
-/* DISCLAIMER SECTION */
-.disc-sec{background:#1a0a0a;color:var(--paper);padding:2.5rem 5rem;border-bottom:2px solid var(--cr-lt)}
-.disc-inner{display:flex;gap:1.5rem;align-items:flex-start;max-width:900px}
-.disc-ic{font-size:2rem;flex-shrink:0;color:var(--cr-lt)}
-.disc-copy h3{font-family:'Syne',sans-serif;font-weight:700;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;color:var(--cr-lt);margin-bottom:.6rem}
-.disc-copy p{font-size:.76rem;line-height:1.75;opacity:.88;font-weight:400}
-
+/* ── RESPONSIVE ── */
 @media(max-width:1100px){
   .kpis{grid-template-columns:repeat(3,1fr)}
   .g4,.pgrid{grid-template-columns:repeat(2,1fr)}
@@ -229,10 +231,10 @@ footer{background:var(--ink);color:rgba(243,239,228,.35);padding:2.6rem 5rem;dis
   .flow::before{display:none}
 }
 @media(max-width:768px){
-  .hero-nav,.sec,.verdict,.psec,.disc-sec,footer{padding-left:1.4rem;padding-right:1.4rem}
+  .hero-nav,.sec,.verdict,.psec,.warn-strip,footer{padding-left:1.5rem;padding-right:1.5rem}
   h1{font-size:2.2rem}
   .g2,.g2a,.vgrid{grid-template-columns:1fr}
-  .kpis,.g3,.g4,.pgrid,.not-list{grid-template-columns:1fr}
+  .kpis,.g3,.g4,.pgrid,.dos-donts{grid-template-columns:1fr}
   .brow{grid-template-columns:1fr}
   .flow{grid-template-columns:1fr 1fr}
 }
@@ -240,11 +242,11 @@ footer{background:var(--ink);color:rgba(243,239,228,.35);padding:2.6rem 5rem;dis
 </head>
 <body>
 
-<!-- STICKY NAV -->
+<!-- ── SIDE NAV ── -->
 <nav class="snav">
-  <a href="#what">Kya Hai?</a>
+  <a href="#what">What Is It</a>
   <a href="#opp">Opportunity</a>
-  <a href="#market">Market</a>
+  <a href="#market">Market Data</a>
   <a href="#compete">Competitors</a>
   <a href="#pricing">Pricing PKR</a>
   <a href="#revenue">Revenue</a>
@@ -255,556 +257,572 @@ footer{background:var(--ink);color:rgba(243,239,228,.35);padding:2.6rem 5rem;dis
   <a href="#prompt">AI Prompt</a>
 </nav>
 
-<!-- ═══ TOP DISCLAIMER BANNER ═══ -->
-<div class="disc-sec">
-  <div class="disc-inner">
-    <div class="disc-ic">⚠️</div>
-    <div class="disc-copy">
-      <h3>Important: This Platform Does NOT Provide Immigration Services</h3>
-      <p>ImmigAI.pk ek <strong>AI-powered profile assessment aur country recommendation tool</strong> hai. Yeh platform kisi bhi qisam ki immigration legal advice, visa application, document preparation, ya immigration services <strong>provide nahi karta</strong>. Users ko hamesha ek licensed immigration consultant ya lawyer se consult karna chahiye. Yeh tool sirf user ke CV aur profile ke basis per best-fit countries suggest karta hai — decisions aur applications ka zimma user ka apna hai.</p>
-    </div>
+<!-- ── WARNING STRIP ── -->
+<div class="warn-strip">
+  <div class="ws-ic">⚠️</div>
+  <div class="ws-body">
+    <h3>Important: This Platform Does NOT Provide Immigration Services</h3>
+    <p>ImmigAI.pk is an <strong>AI-powered profile assessment and country recommendation tool only</strong>. It does not provide immigration legal advice, visa applications, document preparation, or any immigration services. Users must always consult a licensed, BEOE-registered immigration consultant or lawyer for their actual immigration process. This tool only analyzes a user's CV and profile to suggest the best-fit countries — all final decisions and applications remain the user's own responsibility.</p>
   </div>
 </div>
 
-<!-- ═══ HERO ═══ -->
+<!-- ── HERO ── -->
 <section class="hero">
   <nav class="hero-nav">
     <div class="logo">Immigr<span>AI</span>.pk</div>
-    <div class="hero-badge">Pakistan AI Assessment Platform — Investor Dashboard v3 — March 2026</div>
+    <div class="hero-badge">Pakistan AI Assessment Platform — Investor Dashboard — March 2026</div>
   </nav>
   <div class="hero-body">
     <div class="eyebrow">AI Profile Assessment + Country Matching Tool</div>
-    <h1>Apna CV Upload Karo.<br><em>AI Batayega</em> — Kaunsa<br>Country Best Fit Hai.</h1>
-    <div class="disclaimer-hero">
-      <div class="disc-icon">🔎</div>
-      <div class="disc-text"><strong>Platform ka kaam kya hai?</strong> User apna CV aur profile history upload karta hai → AI analyze karke best-fit countries recommend karta hai → User phir ek licensed immigration consultant ke paas jaata hai actual process ke liye. <strong>Hum immigration service nahi dete. Hum sirf smart, data-driven guidance dete hain.</strong></div>
+    <h1>Upload Your CV.<br><em>AI Recommends</em><br>Your Best-Fit Country.</h1>
+    <div class="disc-hero">
+      <div class="dh-icon">🔎</div>
+      <div class="dh-text">
+        <strong>How it works:</strong> User uploads their CV and profile → AI analyzes it and recommends the best-fit countries with eligibility scores → User then contacts a licensed immigration consultant for the actual application process. <strong>We do not provide immigration services. We provide smart, data-driven profile assessment only.</strong>
+      </div>
     </div>
-    <p class="hero-sub">Pakistan mein 86 lakh+ log saal mein emigrate karna chahte hain — lekin kisi ko pata nahi kaunsa country unke profile ke liye best hai. Yahan se shuru hota hai AI ka kaam.</p>
+    <p class="hero-sub">Over 860,000 Pakistanis emigrate every year — but most do not know which country is the best fit for their profile. That is exactly where AI changes everything.</p>
     <div class="kpis">
-      <div class="kpi"><div class="kn">86<small>L+</small></div><div class="kl">Annual Emigrants (BEOE 2024)</div></div>
-      <div class="kpi"><div class="kn">93<small>M</small></div><div class="kl">Adults Want to Emigrate (PIDE)</div></div>
-      <div class="kpi"><div class="kn">0</div><div class="kl">AI Assessment Platforms in Pakistan</div></div>
-      <div class="kpi"><div class="kn">50%</div><div class="kl">Apply Without Knowing Best Country</div></div>
-      <div class="kpi"><div class="kn">$0</div><div class="kl">Cost of AI Assessment vs PKR 50K–600K Consultants</div></div>
+      <div class="kpi"><div class="kn">860<small>K+</small></div><div class="kl">Registered Emigrants Per Year (BEOE 2024)</div></div>
+      <div class="kpi"><div class="kn">93<small>M</small></div><div class="kl">Adults Want to Emigrate (PIDE Survey)</div></div>
+      <div class="kpi"><div class="kn">0</div><div class="kl">AI Profile Assessment Platforms in Pakistan</div></div>
+      <div class="kpi"><div class="kn">50%</div><div class="kl">Avg. Visa Rejection Rate (UK + Schengen)</div></div>
+      <div class="kpi"><div class="kn">PKR 0</div><div class="kl">AI Assessment Cost vs. PKR 50K–600K Consultant</div></div>
     </div>
   </div>
 </section>
 
-<!-- ═══ PAGE 1: WHAT IS THE PLATFORM? ═══ -->
+<!-- ════════════════════════════════ PAGE 1: WHAT IS IT ════════ -->
 <section class="sec reveal" id="what">
   <div class="stag">Page 01 — Platform Definition</div>
-  <h2>Exactly <em>Kya Karta Hai</em> Yeh Platform?</h2>
-  <p class="sint">Yeh sabse zaroori page hai. Apni platform ki sahi positioning samajhna investors ke liye bhi aur users ke liye bhi critical hai.</p>
+  <h2>What Does <em>This Platform</em> Actually Do?</h2>
+  <p class="sint">This is the most critical page for investors. The platform's positioning is what separates it from every immigration company in Pakistan — it is a technology tool, not an immigration service.</p>
 
-  <div class="platform-def">
-    <p><strong>ImmigAI.pk ek AI-powered Profile Assessment aur Country Matching platform hai.</strong> User apna CV, educational background, work experience, language scores (IELTS/TOEFL), age, family situation, aur financial assets upload karta hai. Humara AI engine in sab factors ko analyze karke <strong>top-matched countries, visa pathways, aur eligibility scores generate karta hai</strong> — bilkul waise jaise ek matrimonial app profile match karta hai, lekin yahan immigration ke liye.</p>
-    <p style="margin-top:1rem">Assessment ke baad, platform user ko <strong>verified, licensed Pakistani immigration consultants ke paas refer karta hai</strong> jo actual application process handle karte hain. Hum woh consultant nahi hain — hum woh bridge hain jo user ko sahi consultant tak paunchata hai.</p>
-    <div class="not-list">
-      <div class="not-item yes"><span class="not-icon">✅</span><div><strong>Jo hum karte hain:</strong> AI se CV analyze karna, countries match karna, eligibility score batana, consultant referrals dena, profile gaps highlight karna, best visa pathway suggest karna</div></div>
-      <div class="not-item yes"><span class="not-icon">✅</span><div><strong>Hamara business model:</strong> Subscription fee (assessment tool) + Consultant referral commission + B2B API (consultants ke liye) + Lead generation</div></div>
-      <div class="not-item no"><span class="not-icon">❌</span><div><strong>Jo hum nahi karte:</strong> Visa applications fill karna, documents prepare karna, legal immigration advice dena, government portals mein apply karna</div></div>
-      <div class="not-item no"><span class="not-icon">❌</span><div><strong>Kyun nahi:</strong> Pakistan mein immigration advice dene ke liye BEOE license chahiye. Bina license ke yeh kaam illegal hai. Hum regulatory risk se completely clear hain.</div></div>
+  <div class="pdef">
+    <p><strong>ImmigAI.pk is an AI-powered Profile Assessment and Country Matching platform.</strong> A user uploads their CV, educational background, work experience, language test scores (IELTS/TOEFL/PTE), age, family situation, and approximate financial assets. The AI engine processes all these inputs and generates <strong>top-matched countries, most suitable visa pathways, and a personal eligibility score</strong> — similar to how a job-matching platform scores candidates against roles, but here for international immigration pathways.</p>
+    <p style="margin-top:1rem">After the assessment, the platform <strong>refers the user to verified, licensed Pakistani immigration consultants</strong> who then handle the actual application process. We are not the consultant — we are the intelligent bridge that connects users to the right consultant with the right information before they spend a single rupee on fees.</p>
+    <div class="dos-donts">
+      <div class="dd yes"><span class="dd-ic">✅</span><div><strong>What we DO:</strong> Analyze CVs with AI, match users to countries, generate eligibility scores, highlight profile gaps, suggest the most suitable visa pathway, refer users to verified licensed consultants.</div></div>
+      <div class="dd yes"><span class="dd-ic">✅</span><div><strong>Our revenue model:</strong> Monthly subscription fee (assessment tool access) + consultant referral commission + B2B API licensing (for consultants) + pay-per-report + affiliate partnerships.</div></div>
+      <div class="dd no"><span class="dd-ic">❌</span><div><strong>What we do NOT do:</strong> Fill visa applications, prepare immigration documents, provide legal immigration advice, access government immigration portals, or act as a licensed immigration consultant.</div></div>
+      <div class="dd no"><span class="dd-ic">❌</span><div><strong>Why not:</strong> Providing immigration advisory services in Pakistan requires a BEOE license. Without one, it is illegal. Our platform deliberately stays within the "information technology tool" classification — 100% regulatory safe.</div></div>
     </div>
   </div>
 
-  <h3 style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:1.8rem;font-size:.9rem;text-transform:uppercase;letter-spacing:.07em">User Ka Journey — Step by Step</h3>
+  <h3 style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:1.8rem;font-size:.85rem;text-transform:uppercase;letter-spacing:.07em">Complete User Journey — Step by Step</h3>
   <div class="flow">
     <div class="fstep">
       <div class="fnum">1</div>
-      <div class="ftitle">CV & Profile Upload</div>
-      <div class="fdesc">User apna CV, degrees, experience, IELTS score, age, family status, assets upload karta hai</div>
+      <div class="ftitle">Profile Upload</div>
+      <div class="fdesc">User uploads their CV, degree certificates, IELTS score, age, family status, savings, and career goals</div>
     </div>
     <div class="fstep">
       <div class="fnum">2</div>
       <div class="ftitle">AI Analysis</div>
-      <div class="fdesc">AI 15+ factors analyze karta hai — education, profession, age, language, finances, family</div>
+      <div class="fdesc">AI engine processes 15+ data points: education level, profession, age, language, finances, family size</div>
     </div>
     <div class="fstep">
       <div class="fnum">3</div>
       <div class="ftitle">Country Matching</div>
-      <div class="fdesc">Top 5 countries + visa pathways display hote hain eligibility score ke saath (e.g. Canada 78%, Germany 65%)</div>
+      <div class="fdesc">Top 5 best-fit countries displayed with individual eligibility scores — e.g. Canada 78%, Germany 65%, Australia 71%</div>
     </div>
     <div class="fstep">
       <div class="fnum">4</div>
       <div class="ftitle">Gap Analysis</div>
-      <div class="fdesc">AI batata hai: "IELTS 7.0 chahiye, aapka 6.5 hai" — user improve kar sakta hai</div>
+      <div class="fdesc">AI identifies gaps: "Canada requires IELTS 7.5 — yours is 6.5. Improving it raises your score from 74% to 88%."</div>
     </div>
     <div class="fstep">
       <div class="fnum">5</div>
       <div class="ftitle">Consultant Referral</div>
-      <div class="fdesc">Platform verified licensed consultants suggest karta hai us specific country ke liye</div>
+      <div class="fdesc">Platform recommends verified, licensed consultants specializing in the user's top-matched country</div>
     </div>
-    <div class="fstep disabled">
-      <div class="fnum" style="background:rgba(11,11,18,.2);color:var(--sl-mid)">6</div>
-      <div class="ftitle">Consultant Ka Kaam</div>
-      <div class="fdesc">Actual application, documents, aur visa filing CONSULTANT karta hai — <strong>hum nahi</strong></div>
+    <div class="fstep dim">
+      <div class="fnum">6</div>
+      <div class="ftitle">Consultant Handles It</div>
+      <div class="fdesc">The actual visa application, documents, and filing are handled entirely by the licensed consultant — not us</div>
       <div class="fnote">← Our scope ends here</div>
     </div>
   </div>
 </section>
 
-<!-- ═══ PAGE 2: MARKET OPPORTUNITY ═══ -->
+<!-- ════════════════════════════════ PAGE 2: OPPORTUNITY ════════ -->
 <section class="sec alt reveal" id="opp">
   <div class="stag">Page 02 — Market Opportunity</div>
-  <h2>Kitna Bara Hai <em>Yeh Market?</em></h2>
-  <p class="sint">Pakistan mein log sahi country choose karne ki guidance ke liye PKR 50,000 se PKR 600,000 tak consultants ko dete hain — sirf assessment ke liye. Hamara AI yeh kaam PKR 499 mein karta hai.</p>
+  <h2>How Large Is <em>This Market?</em></h2>
+  <p class="sint">People in Pakistan pay consultants PKR 50,000 to PKR 600,000 just for initial country guidance before even starting an application. Our AI delivers the same guidance for PKR 499 per month.</p>
 
   <div class="g4" style="margin-bottom:1.5px">
-    <div class="card gold" data-n="01"><div class="ctag">Total Addressable Market</div><div class="bnum">$350<small>M</small></div><h3>TAM — Assessment-Only Market</h3><p>86 lakh+ annual emigrants × average PKR 30,000–80,000 paid for initial assessment/guidance = $350M market just for the "which country" question that AI can answer.</p></div>
-    <div class="card sl" data-n="02"><div class="ctag">Serviceable Addressable Market</div><div class="bnum">$120<small>M</small></div><h3>SAM — Digitally Reachable Segment</h3><p>Students + skilled workers + diaspora with smartphone access who research countries online before consulting. ~3–4 million people actively searching per year.</p></div>
-    <div class="card em" data-n="03"><div class="ctag">Serviceable Obtainable Market</div><div class="bnum">$8<small>M</small></div><h3>SOM — Year 3 Realistic Target</h3><p>Conservative: 50,000 paid subscribers at PKR 499–2,499/month average = PKR 1.2–3.7 crore MRR. Consultant referral commissions add 40–60% on top.</p></div>
-    <div class="card bl" data-n="04"><div class="ctag">Growth Driver</div><div class="bnum">119%</div><h3>Skilled Emigration Surge 2022–23</h3><p>Sabse educated, digitally literate log Pakistan chhod rahe hain. Yahi log AI assessment tool use karenge. Perfect product-market fit for the highest-value segment.</p></div>
+    <div class="card gold" data-n="01">
+      <div class="ctag">Total Addressable Market</div>
+      <div class="bnum">$350<small>M</small></div>
+      <h3>TAM — Assessment-Only Market</h3>
+      <p>860,000+ annual emigrants × average PKR 30,000–80,000 paid for initial assessment and country guidance = a $350M market just for answering the question "which country suits me best?"</p>
+    </div>
+    <div class="card sl" data-n="02">
+      <div class="ctag">Serviceable Addressable Market</div>
+      <div class="bnum">$120<small>M</small></div>
+      <h3>SAM — Digitally Reachable Users</h3>
+      <p>Students, skilled workers, and diaspora members with smartphone access who research countries online before consulting. Approximately 3–4 million people actively searching per year.</p>
+    </div>
+    <div class="card em" data-n="03">
+      <div class="ctag">Serviceable Obtainable Market</div>
+      <div class="bnum">$8<small>M</small></div>
+      <h3>SOM — Year 3 Realistic Target</h3>
+      <p>50,000 paid subscribers at a PKR 499–2,499/month average = PKR 1.2–3.7 crore MRR. Consultant referral commissions add an estimated 40–60% on top of subscription revenue.</p>
+    </div>
+    <div class="card bl" data-n="04">
+      <div class="ctag">Key Growth Driver</div>
+      <div class="bnum">119%</div>
+      <h3>Skilled Emigration Surge (2022–23)</h3>
+      <p>Pakistan's most educated and digitally literate citizens are leaving in record numbers. This segment has the highest willingness to pay and the clearest need for an AI assessment tool.</p>
+    </div>
   </div>
-
   <div class="g3">
-    <div class="card" data-n=""><div class="ctag">Core Problem We Solve</div><div class="bnum">PKR 300K</div><h3>Average Wasted on Wrong Country Applications</h3><p>Log bina proper assessment ke apply karte hain aur reject ho jaate hain. Non-refundable fees waste hoti hain. AI pehle bataye: kaunsa country aapke liye best fit hai.</p></div>
-    <div class="card cr" data-n=""><div class="ctag">Pain Point Magnitude</div><div class="bnum">93M</div><h3>Pakistanis Want to Emigrate (PIDE Survey)</h3><p>37–56% of Pakistan's 252M population ne emigration ki desire express ki. Yeh sirf actual emigrants nahi — wannabe emigrants bhi hain jo "assess karna chahte hain kya main qualify karta hun."</p></div>
-    <div class="card tl" data-n=""><div class="ctag">Platform Opportunity</div><div class="bnum">Zero</div><h3>AI Assessment Platforms in Pakistan Today</h3><p>Koi bhi CV-based, AI-powered country matching tool Pakistan mein exist nahi karta. Sab consultants manual assessment karte hain, usually PKR 5,000–50,000 charge karke. Yeh hain aapka white space.</p></div>
+    <div class="card" data-n="">
+      <div class="ctag">Core Problem We Solve</div>
+      <div class="bnum">PKR 300K</div>
+      <h3>Average Cost of Applying to the Wrong Country</h3>
+      <p>Applicants choose countries based on word of mouth, not data — then get rejected. Non-refundable visa fees, IELTS costs, and consultant charges are all wasted. AI assessment prevents this.</p>
+    </div>
+    <div class="card cr" data-n="">
+      <div class="ctag">Demand Scale</div>
+      <div class="bnum">93M</div>
+      <h3>Pakistanis Who Want to Emigrate</h3>
+      <p>37–56% of Pakistan's 252M population has expressed a desire to emigrate (PIDE 2022). Most of them want to know one thing first: "Do I even qualify? Which country is realistic for me?"</p>
+    </div>
+    <div class="card tl" data-n="">
+      <div class="ctag">First Mover Advantage</div>
+      <div class="bnum">Zero</div>
+      <h3>AI Assessment Platforms in Pakistan Today</h3>
+      <p>Not a single CV-based, AI-powered country matching tool exists in Pakistan. Every consultant does manual assessments charging PKR 5,000–50,000. This is your white space — completely uncontested.</p>
+    </div>
   </div>
 </section>
 
-<!-- ═══ PAGE 3: MARKET DATA ═══ -->
+<!-- ════════════════════════════════ PAGE 3: MARKET DATA ════════ -->
 <section class="sec reveal" id="market">
-  <div class="stag">Page 03 — Pakistani Market Data</div>
+  <div class="stag">Page 03 — Pakistan Market Data</div>
   <h2>Real <em>Pakistani</em> Numbers</h2>
-  <p class="sint">Sirf Pakistan ke asli data — BEOE, PIDE, State Bank, NADRA se. Koi estimate nahi, sab verifiable facts.</p>
+  <p class="sint">All data sourced exclusively from Pakistani institutions — BEOE, PIDE, State Bank of Pakistan, NADRA, and Pakistan Bureau of Statistics. No international approximations.</p>
 
   <div class="g2" style="margin-bottom:3rem">
     <div>
-      <h3 style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:1.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.07em">Top Destination Countries — Pakistani Emigrants (Annual)</h3>
+      <h3 style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:1.3rem;font-size:.8rem;text-transform:uppercase;letter-spacing:.07em">Top Destination Countries — Annual Pakistani Emigrants</h3>
       <div class="bars">
-        <div class="brow"><span class="blbl">Saudi Arabia</span><div class="btrk"><div class="bfil" style="width:72%;background:var(--gold)">5.3 Lakh (2025)</div></div><span class="bv">530K</span></div>
-        <div class="brow"><span class="blbl">UAE</span><div class="btrk"><div class="bfil" style="width:38%;background:var(--em)">~2.8 Lakh</div></div><span class="bv">280K</span></div>
-        <div class="brow"><span class="blbl">Qatar</span><div class="btrk"><div class="bfil" style="width:16%;background:var(--blue)">~1.2 Lakh</div></div><span class="bv">120K</span></div>
+        <div class="brow"><span class="blbl">Saudi Arabia</span><div class="btrk"><div class="bfil" style="width:72%;background:var(--gold)">530,256 (2025)</div></div><span class="bv">530K</span></div>
+        <div class="brow"><span class="blbl">UAE</span><div class="btrk"><div class="bfil" style="width:38%;background:var(--em)">~280,000</div></div><span class="bv">280K</span></div>
+        <div class="brow"><span class="blbl">Qatar</span><div class="btrk"><div class="bfil" style="width:16%;background:var(--blue)">~120,000</div></div><span class="bv">120K</span></div>
         <div class="brow"><span class="blbl">UK (Students)</span><div class="btrk"><div class="bfil" style="width:13%;background:var(--cr)">35,500</div></div><span class="bv">35.5K</span></div>
-        <div class="brow"><span class="blbl">Canada</span><div class="btrk"><div class="bfil" style="width:9%;background:var(--teal)">~65K</div></div><span class="bv">65K</span></div>
-        <div class="brow"><span class="blbl">Australia</span><div class="btrk"><div class="bfil" style="width:7%;background:var(--sl)">~50K</div></div><span class="bv">50K</span></div>
-        <div class="brow"><span class="blbl">Germany</span><div class="btrk"><div class="bfil" style="width:5%;background:#6b3a1a">~20K</div></div><span class="bv">20K</span></div>
+        <div class="brow"><span class="blbl">Canada</span><div class="btrk"><div class="bfil" style="width:9%;background:var(--teal)">~65,000</div></div><span class="bv">65K</span></div>
+        <div class="brow"><span class="blbl">Australia</span><div class="btrk"><div class="bfil" style="width:7%;background:var(--sl)">~50,000</div></div><span class="bv">50K</span></div>
+        <div class="brow"><span class="blbl">Germany</span><div class="btrk"><div class="bfil" style="width:5%;background:#6b3a1a">~20,000</div></div><span class="bv">20K</span></div>
       </div>
     </div>
     <div>
-      <h3 style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:1.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.07em">Pakistan Income Segments — Pricing Ka Basis</h3>
+      <h3 style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:1.3rem;font-size:.8rem;text-transform:uppercase;letter-spacing:.07em">Pakistan Income Segments — Pricing Strategy Basis</h3>
       <table class="tbl">
-        <thead><tr><th>Segment</th><th>Monthly PKR</th><th>% Urban Pop</th><th>Pricing Fit</th></tr></thead>
+        <thead><tr><th>Segment</th><th>Monthly PKR</th><th>% Urban Pop</th><th>Suitable Tier</th></tr></thead>
         <tbody>
           <tr><td>Labour / Minimum Wage</td><td>PKR 37K–50K</td><td>~35%</td><td><span class="bdg w">Free tier only</span></td></tr>
-          <tr><td>Lower-Middle Class</td><td>PKR 50K–80K</td><td>~30%</td><td><span class="bdg y">PKR 499–999</span></td></tr>
-          <tr><td>Middle Class (urban)</td><td>PKR 80K–150K</td><td>~20%</td><td><span class="bdg y">PKR 1,499–2,499</span></td></tr>
-          <tr><td>Upper-Middle Class</td><td>PKR 150K–350K</td><td>~12%</td><td><span class="bdg g">PKR 3,999–7,999</span></td></tr>
+          <tr><td>Lower-Middle Class</td><td>PKR 50K–80K</td><td>~30%</td><td><span class="bdg y">PKR 499/month</span></td></tr>
+          <tr><td>Middle Class (urban)</td><td>PKR 80K–150K</td><td>~20%</td><td><span class="bdg y">PKR 2,499/month</span></td></tr>
+          <tr><td>Upper-Middle Class</td><td>PKR 150K–350K</td><td>~12%</td><td><span class="bdg g">PKR 5,999/month</span></td></tr>
           <tr><td>Affluent / Corporate</td><td>PKR 350K+</td><td>~3%</td><td><span class="bdg g">PKR 14,999 B2B</span></td></tr>
         </tbody>
       </table>
       <div class="hbox" style="margin-top:1.6rem">
-        <p style="font-size:.74rem;line-height:1.72"><strong>Key insight:</strong> Average Pakistani national income PKR 82,100/month hai. Hamara Professional tier (PKR 2,499/month) sirf 3% of income hai — jo ki consultant ke PKR 300,000+ one-time fee ka 0.8% hai. Value proposition crystal clear hai.</p>
+        <p style="font-size:.74rem;line-height:1.72"><strong>Key pricing insight:</strong> The average Pakistani national income is PKR 82,100/month. Our Professional tier at PKR 2,499/month represents only 3% of average monthly income — versus the PKR 300,000+ one-time fee that traditional consultants charge just for initial guidance. The value proposition is undeniable.</p>
       </div>
     </div>
   </div>
 
   <hr class="div">
-  <h3 style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:1.6rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.07em">Digital Infrastructure — App Launch Ready Hai Pakistan?</h3>
+  <h3 style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:1.6rem;font-size:.8rem;text-transform:uppercase;letter-spacing:.07em">Digital Infrastructure — Is Pakistan Ready for an App-Based Platform?</h3>
   <div class="g3">
-    <div class="sb"><div class="sbn" style="color:var(--gold)">157M</div><div class="sbs">Broadband subscribers (Jan 2026) — Nationwide app delivery viable hai</div></div>
-    <div class="sb"><div class="sbn" style="color:var(--em)">96%</div><div class="sbs">Household smartphone penetration — Mobile-first product perfect choice hai</div></div>
-    <div class="sb"><div class="sbn" style="color:var(--blue)">88%</div><div class="sbs">Retail transactions digital FY2025 — JazzCash/Easypaisa payment infra strong</div></div>
-    <div class="sb"><div class="sbn" style="color:var(--cr)">97%</div><div class="sbs">NADRA registered population — Biometric identity verification solved hai</div></div>
-    <div class="sb"><div class="sbn" style="color:var(--teal)">12M+</div><div class="sbs">NADRA PakID App downloads — Citizens digital workflows ke aadi hain</div></div>
-    <div class="sb"><div class="sbn" style="color:var(--sl-mid)">27M</div><div class="sbs">E-wallet users +85% YoY — Subscription billing frictionless hai</div></div>
+    <div class="sb"><div class="sbn" style="color:var(--gold)">157M</div><div class="sbs">Broadband subscribers (January 2026) — nationwide app delivery is fully viable</div></div>
+    <div class="sb"><div class="sbn" style="color:var(--em)">96%</div><div class="sbs">Household smartphone penetration — a mobile-first product is the only logical choice</div></div>
+    <div class="sb"><div class="sbn" style="color:var(--blue)">88%</div><div class="sbs">Retail transactions are now digital (FY2025) — JazzCash and Easypaisa payment infrastructure is strong</div></div>
+    <div class="sb"><div class="sbn" style="color:var(--cr)">97%</div><div class="sbs">NADRA population coverage — biometric identity verification is already solved nationally</div></div>
+    <div class="sb"><div class="sbn" style="color:var(--teal)">12M+</div><div class="sbs">NADRA PakID App downloads — Pakistani citizens are already comfortable with digital identity workflows</div></div>
+    <div class="sb"><div class="sbn" style="color:var(--sl-mid)">27M</div><div class="sbs">E-wallet users grew 85% YoY — subscription billing and recurring payments are completely frictionless</div></div>
   </div>
 </section>
 
-<!-- ═══ PAGE 4: COMPETITORS ═══ -->
+<!-- ════════════════════════════════ PAGE 4: COMPETITORS ════════ -->
 <section class="sec alt reveal" id="compete">
   <div class="stag">Page 04 — Pakistani Competitor Landscape</div>
-  <h2>Pakistan Ke <em>Competitors</em> — Koi AI Nahi</h2>
-  <p class="sint">Yeh sab Pakistan ki real immigration companies hain jo abhi assessment services deti hain. Inmein se kisi ke paas bhi AI-powered, self-service assessment tool nahi hai. Yeh aapka direct competition hai.</p>
+  <h2>Pakistan's Competitors — <em>None Have AI</em></h2>
+  <p class="sint">These are the real Pakistani immigration companies currently offering profile assessments. Not one has an AI-powered, self-service assessment tool. This is your direct and undefended competitive landscape.</p>
 
   <table class="tbl" style="margin-bottom:2.5rem">
     <thead><tr>
-      <th>Company</th><th>Est.</th><th>Assessment Fee (PKR)</th><th>Digital Tool?</th><th>AI Assessment?</th><th>Hamara Advantage</th>
+      <th>Company</th><th>Est.</th><th>Assessment Fee (PKR)</th><th>Digital Tools?</th><th>AI Assessment?</th><th>Your Competitive Advantage</th>
     </tr></thead>
     <tbody>
       <tr>
-        <td><strong>Immigration Experts PK</strong><br><small style="opacity:.6">immigrationexperts.pk — Lahore, ISB, FSD, Peshawar</small></td>
-        <td>2008</td>
-        <td>PKR 5,000–25,000<br><small>(free email assessment claim)</small></td>
+        <td><strong>Immigration Experts PK</strong><br><small style="opacity:.6">immigrationexperts.pk — Lahore, Islamabad, Faisalabad, Peshawar</small></td>
+        <td>2008</td><td>PKR 5,000–25,000<br><small>(free email assessment claimed)</small></td>
         <td><span class="bdg y">Email + phone only</span></td>
-        <td><span class="bdg r">Nahi — manual</span></td>
-        <td>5–7 days wait for assessment response, no self-service, no score</td>
+        <td><span class="bdg r">No — fully manual</span></td>
+        <td>5–7 day wait for assessment response, no self-service, no eligibility score report</td>
       </tr>
       <tr>
-        <td><strong>Superior Consulting</strong><br><small style="opacity:.6">superiorimmigration.com — Karachi + Dubai</small></td>
-        <td>2004</td>
-        <td>PKR 0 (free assessment claim)<br><small>+ full service: PKR 250K–600K</small></td>
-        <td><span class="bdg y">Website inquiry form</span></td>
-        <td><span class="bdg r">Nahi — consultant calls you</span></td>
-        <td>20+ years experience but zero tech — still waiting for a phone call</td>
+        <td><strong>Superior Consulting</strong><br><small style="opacity:.6">superiorimmigration.com — Karachi + Dubai (est. 2004)</small></td>
+        <td>2004</td><td>PKR 0 (free assessment claimed)<br><small>+ full service: PKR 250K–600K</small></td>
+        <td><span class="bdg y">Basic website form</span></td>
+        <td><span class="bdg r">No — consultant calls back</span></td>
+        <td>20+ years experience but zero technology — users still wait for a phone callback</td>
       </tr>
       <tr>
-        <td><strong>Kaizen Immigration</strong><br><small style="opacity:.6">kaizenimmigration.com — Karachi</small></td>
-        <td>2015</td>
-        <td>PKR 5,000–20,000<br><small>(initial consultation)</small></td>
+        <td><strong>Kaizen Immigration</strong><br><small style="opacity:.6">kaizenimmigration.com — Karachi (multiple offices)</small></td>
+        <td>2015</td><td>PKR 5,000–20,000<br><small>(initial consultation fee)</small></td>
         <td><span class="bdg y">Contact form + WhatsApp</span></td>
-        <td><span class="bdg r">Nahi — human assessment</span></td>
-        <td>Best website design but consultation is fully human, no score, no report</td>
+        <td><span class="bdg r">No — human-only</span></td>
+        <td>Best-designed website of all competitors — but assessment is still 100% human, no score, no instant report</td>
       </tr>
       <tr>
-        <td><strong>ISAS Consultants</strong><br><small style="opacity:.6">isas.com.pk — Karachi, est. 2003</small></td>
-        <td>2003</td>
-        <td>PKR 5,000–15,000<br><small>(case assessment fee)</small></td>
+        <td><strong>ISAS Consultants</strong><br><small style="opacity:.6">isas.com.pk — Karachi (est. 2003)</small></td>
+        <td>2003</td><td>PKR 5,000–15,000<br><small>(case assessment fee)</small></td>
         <td><span class="bdg y">Static website</span></td>
-        <td><span class="bdg r">Nahi</span></td>
-        <td>Licensed advisers but 1000+ case backlog, slow response, in-person only</td>
+        <td><span class="bdg r">No</span></td>
+        <td>Licensed advisers but in-person only, 1,000+ case backlog, slow response times</td>
       </tr>
       <tr>
-        <td><strong>AINiT Consultancy</strong><br><small style="opacity:.6">ainit.net — Karachi + Lahore</small></td>
-        <td>~2010</td>
-        <td>PKR 3,000–15,000<br><small>(profile evaluation)</small></td>
+        <td><strong>AINiT Consultancy</strong><br><small style="opacity:.6">ainit.net — Karachi + Lahore (est. ~2010)</small></td>
+        <td>~2010</td><td>PKR 3,000–15,000<br><small>(profile evaluation)</small></td>
         <td><span class="bdg y">WhatsApp dependent</span></td>
-        <td><span class="bdg r">Nahi</span></td>
-        <td>500+ university partners but no digital workflow, no instant report</td>
+        <td><span class="bdg r">No</span></td>
+        <td>500+ university partners but no digital workflow, no instant assessment, no comparison report</td>
       </tr>
       <tr>
-        <td><strong>KORUU Consultants</strong><br><small style="opacity:.6">koruu.com — Islamabad (NZ-based roots)</small></td>
-        <td>~2008</td>
-        <td>PKR 5,000–20,000<br><small>(eligibility check)</small></td>
+        <td><strong>KORUU Consultants</strong><br><small style="opacity:.6">koruu.com — Islamabad (New Zealand-based roots, est. ~2008)</small></td>
+        <td>~2008</td><td>PKR 5,000–20,000<br><small>(eligibility check)</small></td>
         <td><span class="bdg y">Blog + contact form</span></td>
-        <td><span class="bdg r">Nahi</span></td>
-        <td>Good for EB2-NIW but geographic limitation, no self-service platform</td>
+        <td><span class="bdg r">No</span></td>
+        <td>Strong for EB2-NIW USA but geographically limited, no self-service tool at all</td>
       </tr>
       <tr>
-        <td><strong>ZANS Group</strong><br><small style="opacity:.6">zansgroup.com — Lahore, Karachi, ISB</small></td>
-        <td>2020</td>
-        <td>PKR 5,000–15,000<br><small>(initial UK assessment)</small></td>
-        <td><span class="bdg y">Decent website</span></td>
-        <td><span class="bdg r">Nahi — UK only</span></td>
-        <td>UK only focus — narrow, no multi-country comparison tool</td>
+        <td><strong>ZANS Group</strong><br><small style="opacity:.6">zansgroup.com — Lahore, Karachi, Islamabad (est. 2020)</small></td>
+        <td>2020</td><td>PKR 5,000–15,000<br><small>(initial UK-focused assessment)</small></td>
+        <td><span class="bdg y">Reasonable website</span></td>
+        <td><span class="bdg r">No — UK only</span></td>
+        <td>UK-only focus means no multi-country comparison capability whatsoever</td>
       </tr>
       <tr>
-        <td><strong>Euro Immigration Consultants</strong><br><small style="opacity:.6">euroimmiconsultant.pk — Karachi</small></td>
-        <td>~2010</td>
-        <td>PKR 0–10,000<br><small>(published fee structure)</small></td>
-        <td><span class="bdg g">Published fees (best in class)</span></td>
-        <td><span class="bdg r">Nahi</span></td>
-        <td>Most transparent but still phone/office based, no AI, no instant report</td>
+        <td><strong>Euro Immigration Consultants</strong><br><small style="opacity:.6">euroimmiconsultant.pk — Karachi (Toronto-based parent, est. ~2010)</small></td>
+        <td>~2010</td><td>PKR 0–10,000<br><small>(published fee structure — most transparent)</small></td>
+        <td><span class="bdg g">Published pricing online</span></td>
+        <td><span class="bdg r">No</span></td>
+        <td>Most transparent pricing of all competitors — still phone/office-based, no AI, no instant report</td>
       </tr>
       <tr>
-        <td><strong>WSL Consultants</strong><br><small style="opacity:.6">wslconsultants.com — Lahore, est. 2012</small></td>
-        <td>2012</td>
-        <td>PKR 3,000–12,000<br><small>(initial assessment)</small></td>
+        <td><strong>WSL Consultants</strong><br><small style="opacity:.6">wslconsultants.com — Lahore (est. 2012)</small></td>
+        <td>2012</td><td>PKR 3,000–12,000<br><small>(initial assessment)</small></td>
         <td><span class="bdg y">Content blog</span></td>
-        <td><span class="bdg r">Nahi</span></td>
-        <td>IELTS prep + immigration but no integrated AI profile assessment tool</td>
+        <td><span class="bdg r">No</span></td>
+        <td>Good content marketing, IELTS prep integration — but zero AI, no automated assessment tool</td>
       </tr>
       <tr style="background:rgba(200,146,26,.05)">
-        <td><strong>✅ ImmigAI.pk (Yours)</strong><br><small style="opacity:.6">AI Assessment + Country Matching Platform</small></td>
-        <td>2026</td>
-        <td><strong>PKR 499–2,499/month</strong><br><small>(unlimited self-service assessments)</small></td>
-        <td><span class="bdg g">Full AI + App + Urdu</span></td>
-        <td><span class="bdg g">Haan — 24/7 instant results</span></td>
-        <td><strong>First mover. Instant AI score. Multi-country comparison. Urdu language. No office visit needed.</strong></td>
+        <td><strong>✅ ImmigAI.pk — Your Platform</strong><br><small style="opacity:.6">AI Profile Assessment + Country Matching</small></td>
+        <td>2026</td><td><strong>PKR 0–14,999/month</strong><br><small>(unlimited self-service assessments)</small></td>
+        <td><span class="bdg g">Full AI + App + Bilingual</span></td>
+        <td><span class="bdg g">Yes — instant, 24/7, automated</span></td>
+        <td><strong>First mover. Instant AI score in 30 seconds. Multi-country comparison. No office visit. No waiting.</strong></td>
       </tr>
     </tbody>
   </table>
 
   <div class="hbox">
-    <p style="font-size:.8rem;line-height:1.78"><strong>Critical competitive insight:</strong> Har competitor ka assessment model same hai — user call karo, meeting karo, phir manually assess karo. Yeh process slow (3–7 days), expensive (PKR 5K–25K per session), aur scalable nahi hai. ImmigAI.pk yeh sab 30 seconds mein aur PKR 499/month mein karta hai. Koi contest hi nahi hai — aap ek entirely new category bana rahe hain: <em>"AI Immigration Assessment"</em> — jo Pakistan mein exist hi nahi karti abhi.</p>
+    <p style="font-size:.8rem;line-height:1.78"><strong>Critical competitive insight:</strong> Every single competitor uses the same assessment model — the user calls, books an office meeting, and waits days for a manual evaluation. This process is slow (3–7 days), expensive (PKR 5K–25K per session), and completely unscalable. ImmigAI.pk delivers the same output in 30 seconds for PKR 499/month. More importantly — you are not just competing with consultants. You are creating an entirely new category: <em>"AI Immigration Profile Assessment"</em> — which simply does not exist in Pakistan today.</p>
   </div>
 </section>
 
-<!-- ═══ PAGE 5: SUBSCRIPTION PRICING PKR ═══ -->
+<!-- ════════════════════════════════ PAGE 5: PRICING ════════ -->
 <section class="sec reveal" id="pricing">
   <div class="stag">Page 05 — Subscription Pricing (PKR)</div>
-  <h2>Pakistani Logo Ke Liye <em>PKR Pricing</em></h2>
-  <p class="sint">Yeh pricing Pakistan ki real income levels pe based hai. Yeh sirf assessment tool ka pricing hai — immigration service ka nahi. Users apne budget mein assess kar sakte hain aur phir consultant ke paas jaate hain.</p>
+  <h2>Pricing for <em>Pakistani Users</em> (PKR)</h2>
+  <p class="sint">All pricing is calibrated to Pakistan's real income levels — from PKR 37,000 minimum wage earners to PKR 350,000+ upper-middle-class professionals. This is pricing for the assessment tool only, not for immigration services.</p>
 
   <div class="pgrid" style="margin-bottom:3rem">
     <!-- FREE -->
     <div class="ptier">
-      <div class="tnm">Free — Muft</div>
-      <div class="tpr"><sup></sup>0<sub> PKR/maah</sub></div>
-      <div class="tln">Gulf workers + first-time explorers (PKR 37K–60K/month income)</div>
+      <div class="tnm">Free Tier</div>
+      <div class="tpr"><sup></sup>0<sub> PKR/month</sub></div>
+      <div class="tln">Gulf workers and first-time explorers (PKR 37K–60K income)</div>
       <ul class="tfts">
         <li>1 free AI profile assessment per month</li>
-        <li>Top 3 country recommendations (basic)</li>
-        <li>Urdu + English language support</li>
+        <li>Top 3 country recommendations (summary only)</li>
         <li>Basic eligibility score (0–100)</li>
+        <li>English + Urdu language support</li>
         <li>Document checklist download</li>
-        <li>Consultant directory access (view only)</li>
-        <li>WhatsApp bot assessment (3 queries)</li>
+        <li>Consultant directory — view only</li>
+        <li>WhatsApp bot (3 assessment queries)</li>
         <li>Basic profile gap summary</li>
       </ul>
       <div class="trev">
         <strong>Target:</strong> Gulf-bound workers + curious users<br>
-        <strong>Strategy:</strong> Freemium funnel — convert to paid<br>
-        <strong>Goal:</strong> 100,000 free users Year 1
+        <strong>Goal:</strong> 100,000 free users in Year 1<br>
+        <strong>Strategy:</strong> Freemium top-of-funnel
       </div>
     </div>
 
     <!-- STARTER -->
     <div class="ptier">
-      <div class="tnm">Starter — Bunyadi</div>
-      <div class="tpr"><sup>PKR </sup>499<sub>/maah</sub></div>
-      <div class="tln">Students + lower-middle class (PKR 50K–80K/month income)</div>
+      <div class="tnm">Starter</div>
+      <div class="tpr"><sup>PKR </sup>499<sub>/month</sub></div>
+      <div class="tln">Students and lower-middle-class users (PKR 50K–80K income)</div>
       <ul class="tfts">
         <li>Unlimited AI profile assessments</li>
-        <li>Top 10 country recommendations + scores</li>
-        <li>Full eligibility percentage per country</li>
+        <li>Top 10 countries with full eligibility scores</li>
         <li>Detailed profile gap analysis report</li>
-        <li>Suggested improvements (IELTS score, experience)</li>
+        <li>Improvement suggestions (IELTS, experience, age)</li>
         <li>Verified consultant referrals (3 per month)</li>
-        <li>Save + compare multiple profiles</li>
-        <li>Email report PDF export</li>
+        <li>Save and compare multiple profiles</li>
+        <li>PDF report export via email</li>
         <li>WhatsApp bot (unlimited queries)</li>
       </ul>
       <div class="trev">
         <strong>Target:</strong> Students + first-time applicants<br>
         <strong>Conversion:</strong> 2% of free users → 2,000 paid<br>
-        <strong>MRR:</strong> PKR 9.98 lakh/month
+        <strong>MRR:</strong> PKR 998,000/month
       </div>
     </div>
 
     <!-- PROFESSIONAL — FEATURED -->
     <div class="ptier feat">
-      <div class="ftag">Sabse Popular — Best Value</div>
-      <div class="tnm">Professional — Mahir</div>
-      <div class="tpr"><sup>PKR </sup>2,499<sub>/maah</sub></div>
-      <div class="tln">Skilled workers + middle class (PKR 80K–200K/month income)</div>
+      <div class="ftag">Most Popular — Best Value</div>
+      <div class="tnm">Professional</div>
+      <div class="tpr"><sup>PKR </sup>2,499<sub>/month</sub></div>
+      <div class="tln">Skilled workers and middle-class users (PKR 80K–200K income)</div>
       <ul class="tfts">
-        <li>Everything in Starter</li>
+        <li>Everything in Starter tier</li>
         <li>AI deep profile analysis (50+ data points)</li>
         <li>Side-by-side country comparison tool</li>
-        <li>Canada CRS score calculator</li>
+        <li>Canada CRS score estimator</li>
         <li>Australia SkillSelect points calculator</li>
-        <li>UK skilled worker points checker</li>
+        <li>UK Skilled Worker points checker</li>
         <li>Germany Job Seeker Visa fit score</li>
-        <li>Timeline prediction per pathway</li>
-        <li>Profile improvement roadmap (6-month plan)</li>
+        <li>Estimated processing timeline per pathway</li>
+        <li>6-month profile improvement roadmap</li>
         <li>Priority consultant matching (5 referrals/month)</li>
-        <li>Assessment history + version comparison</li>
-        <li>Family profile assessment included</li>
+        <li>Full assessment history and version comparison</li>
+        <li>Family member profile included</li>
       </ul>
       <div class="trev" style="background:rgba(200,146,26,.15)">
-        <strong>Target:</strong> Engineers, IT professionals, doctors<br>
+        <strong>Target:</strong> IT professionals, engineers, doctors<br>
         <strong>Conversion:</strong> 0.5% of active users → 5,000<br>
-        <strong>MRR:</strong> PKR 1.25 crore/month
+        <strong>MRR:</strong> PKR 12.5M/month
       </div>
     </div>
 
     <!-- B2B AGENCY -->
     <div class="ptier">
       <div class="tnm">Agency — B2B</div>
-      <div class="tpr"><sup>PKR </sup>14,999<sub>/maah</sub></div>
-      <div class="tln">Licensed immigration consultants (5,170+ OEPs, immigration firms)</div>
+      <div class="tpr"><sup>PKR </sup>14,999<sub>/month</sub></div>
+      <div class="tln">Licensed immigration consultants (5,170+ OEPs and firms)</div>
       <ul class="tfts">
-        <li>Everything in Professional</li>
+        <li>Everything in Professional tier</li>
         <li>White-label AI assessment tool</li>
-        <li>100 client assessments/month</li>
+        <li>100 client assessments per month</li>
         <li>Client management dashboard</li>
-        <li>Bulk CV upload + batch processing</li>
-        <li>Custom branding on reports</li>
+        <li>Bulk CV upload and batch processing</li>
+        <li>Custom branding on all reports</li>
         <li>API access for website integration</li>
-        <li>Lead scoring + conversion tracking</li>
-        <li>Analytics: best-performing pathways</li>
-        <li>Priority support + onboarding</li>
-        <li>BEOE database integration (coming soon)</li>
+        <li>Lead scoring and conversion tracking</li>
+        <li>Analytics: top-performing pathways by region</li>
+        <li>Priority onboarding and dedicated support</li>
+        <li>BEOE database integration (coming in Phase 3)</li>
       </ul>
       <div class="trev">
-        <strong>Target:</strong> 5,170 licensed OEPs + firms<br>
-        <strong>Conversion:</strong> 0.5% → 26 agencies<br>
-        <strong>MRR:</strong> PKR 38.9 lakh/month
+        <strong>Target:</strong> 5,170 licensed OEPs + immigration firms<br>
+        <strong>Conversion:</strong> 0.5% → 26 agencies in Year 1<br>
+        <strong>MRR:</strong> PKR 3.9M/month
       </div>
     </div>
   </div>
 
-  <h3 style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:1.5rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.07em">Additional Revenue Streams — Assessment Platform Ke Liye</h3>
+  <h3 style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:1.5rem;font-size:.8rem;text-transform:uppercase;letter-spacing:.07em">Additional Revenue Streams Beyond Subscriptions</h3>
   <div class="g3" style="gap:1.5px">
-    <div class="card" data-n=""><div class="ctag">Referral Commission</div><h3>Consultant Lead Generation</h3><p>User ko verified consultant se connect karo — consultant PKR 2,000–10,000 per successful lead deta hai. Target: 1,000 referrals/month × PKR 3,000 avg = PKR 30 lakh/month additional revenue.</p></div>
-    <div class="card gold" data-n=""><div class="ctag">Per-Assessment Pay</div><h3>One-Time Deep Report</h3><p>Subscribe na karne waale PKR 999 mein single detailed assessment report buy kar sakte hain. High-intent users ke liye: "Mujhe sirf ek dafa chahiye." Projected: 2,000 reports/month × PKR 999 = PKR 20 lakh/month.</p></div>
-    <div class="card em" data-n=""><div class="ctag">B2B API Licensing</div><h3>White-Label API for Consultants</h3><p>Consultants apni website par hamara AI assessment tool embed kar sakte hain PKR 9,999/month API fee per. Target: 50 consultants Year 2 = PKR 50 lakh/month additional.</p></div>
-    <div class="card sl" data-n=""><div class="ctag">IELTS/Test Prep Referrals</div><h3>Skill Gap Affiliate Revenue</h3><p>Jab AI bataye "IELTS improve karo" — IELTS prep platforms (British Council, Marifah etc.) ko referral bhejo. PKR 500–2,000 per enrollment. Target: 3,000 referrals/month.</p></div>
-    <div class="card bl" data-n=""><div class="ctag">Employer Partnerships</div><h3>Talent Pipeline for Gulf Employers</h3><p>Saudi/UAE employers ko pre-screened Pakistani professional profiles dena. Employer pays PKR 5,000–20,000 per quality lead. B2B revenue with zero extra cost to user.</p></div>
-    <div class="card tl" data-n=""><div class="ctag">Data Intelligence</div><h3>Anonymized Migration Trend Reports</h3><p>Aggregate (anonymized) data sell karo — government agencies, universities, NGOs, World Bank ko. "Which professions are most likely to emigrate from Pakistan in 2026?" PKR 50L–1Cr per report.</p></div>
+    <div class="card" data-n=""><div class="ctag">Referral Commission</div><h3>Consultant Lead Generation</h3><p>Connect users to verified consultants. The consultant pays PKR 2,000–10,000 per successful lead referral. Target: 1,000 referrals/month × PKR 3,000 average = PKR 3.0M/month additional revenue.</p></div>
+    <div class="card gold" data-n=""><div class="ctag">Pay-Per-Report</div><h3>One-Time Deep Assessment Report</h3><p>Non-subscribers pay PKR 999 for a single detailed assessment report — for users who only need it once. Target: 2,000 reports/month × PKR 999 = PKR 2.0M/month additional revenue.</p></div>
+    <div class="card em" data-n=""><div class="ctag">API Licensing</div><h3>White-Label API for Consultants</h3><p>Consultants embed the AI assessment tool directly on their own website for PKR 9,999/month API license fee. Target: 50 consultants by Year 2 = PKR 5.0M/month additional revenue.</p></div>
+    <div class="card sl" data-n=""><div class="ctag">Affiliate Revenue</div><h3>IELTS and Test Prep Referrals</h3><p>When AI identifies a language gap, users are referred to IELTS prep platforms — British Council Pakistan, Marifah, and others. Earn PKR 500–2,000 per enrollment. Target: 3,000 referrals/month.</p></div>
+    <div class="card bl" data-n=""><div class="ctag">Employer Partnerships</div><h3>Talent Pipeline for Gulf Employers</h3><p>Supply pre-screened Pakistani professional profiles to Saudi and UAE employers seeking Pakistani talent. Employer pays PKR 5,000–20,000 per quality lead. Pure B2B revenue with zero extra cost to users.</p></div>
+    <div class="card tl" data-n=""><div class="ctag">Data Intelligence</div><h3>Anonymized Migration Trend Reports</h3><p>Sell aggregated, anonymized trend data to government agencies, universities, NGOs, and the World Bank. Sample product: "Top emigrating professions from Pakistan in 2026." Projected PKR 5–10M per report annually.</p></div>
   </div>
 </section>
 
-<!-- ═══ PAGE 6: REVENUE PROJECTIONS ═══ -->
+<!-- ════════════════════════════════ PAGE 6: REVENUE ════════ -->
 <section class="sec alt reveal" id="revenue">
   <div class="stag">Page 06 — Revenue Projections</div>
-  <h2>5-Year <em>Revenue</em> Model (PKR)</h2>
-  <p class="sint">Conservative projections based on realistic Pakistani market penetration. Break-even expected at Month 14–18.</p>
+  <h2>5-Year <em>Revenue Model</em> (PKR)</h2>
+  <p class="sint">Conservative projections based on realistic Pakistani market penetration rates. Break-even is expected at Month 14–18 with disciplined cost management.</p>
 
   <table class="tbl" style="margin-bottom:2.5rem">
     <thead><tr>
-      <th>Saal</th><th>Free Users</th><th>Paid Subscribers</th><th>Avg ARPU/Month</th><th>Subscription ARR (PKR)</th><th>Referral + Other Rev</th><th>Total Annual Rev (PKR)</th><th>EBITDA Margin</th>
+      <th>Year</th><th>Free Users</th><th>Paid Subscribers</th><th>Avg ARPU/Month</th><th>Subscription ARR</th><th>Referral + Other Rev</th><th>Total Annual Revenue</th><th>EBITDA Margin</th>
     </tr></thead>
     <tbody>
       <tr><td><strong>Year 1</strong></td><td>25,000</td><td>1,500</td><td>PKR 1,200</td><td>PKR 2.16 crore</td><td>PKR 72 lakh</td><td><strong>PKR 2.88 crore</strong></td><td><span class="bdg r">–55%</span></td></tr>
       <tr><td><strong>Year 2</strong></td><td>80,000</td><td>8,000</td><td>PKR 1,600</td><td>PKR 15.36 crore</td><td>PKR 4.8 crore</td><td><strong>PKR 20.16 crore</strong></td><td><span class="bdg r">–12%</span></td></tr>
       <tr style="background:rgba(200,146,26,.05)"><td><strong>Year 3 ★</strong></td><td>200,000</td><td>22,000</td><td>PKR 1,900</td><td>PKR 50.16 crore</td><td>PKR 14 crore</td><td><strong>PKR 64.16 crore</strong></td><td><span class="bdg y">+14%</span></td></tr>
-      <tr><td><strong>Year 4</strong></td><td>450,000</td><td>50,000</td><td>PKR 2,100</td><td>PKR 1.26 arab</td><td>PKR 35 crore</td><td><strong>PKR 1.61 arab</strong></td><td><span class="bdg g">+28%</span></td></tr>
-      <tr><td><strong>Year 5</strong></td><td>900,000</td><td>100,000</td><td>PKR 2,400</td><td>PKR 2.88 arab</td><td>PKR 72 crore</td><td><strong>PKR 3.6 arab</strong></td><td><span class="bdg g">+38%</span></td></tr>
+      <tr><td><strong>Year 4</strong></td><td>450,000</td><td>50,000</td><td>PKR 2,100</td><td>PKR 1.26 billion</td><td>PKR 35 crore</td><td><strong>PKR 1.61 billion</strong></td><td><span class="bdg g">+28%</span></td></tr>
+      <tr><td><strong>Year 5</strong></td><td>900,000</td><td>100,000</td><td>PKR 2,400</td><td>PKR 2.88 billion</td><td>PKR 72 crore</td><td><strong>PKR 3.6 billion</strong></td><td><span class="bdg g">+38%</span></td></tr>
     </tbody>
   </table>
 
   <div class="g2">
     <div>
-      <h3 style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:1.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.07em">Unit Economics</h3>
+      <h3 style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:1.3rem;font-size:.8rem;text-transform:uppercase;letter-spacing:.07em">Unit Economics at a Glance</h3>
       <div class="g3" style="gap:1.5px">
-        <div class="card" data-n=""><div class="ctag">Customer Acquisition Cost</div><div class="bnum">PKR<br>800–2,500</div><p>Digital CAC via Facebook, YouTube, Google. Organic SEO/WhatsApp extremely low — Urdu immigration content has zero competition.</p></div>
-        <div class="card gold" data-n=""><div class="ctag">Lifetime Value</div><div class="bnum">PKR<br>18K–45K</div><p>Average 12–18 month subscription + referral commissions + report sales. LTV:CAC ratio: 12–25x.</p></div>
-        <div class="card em" data-n=""><div class="ctag">Gross Margin</div><div class="bnum">72–82%</div><p>SaaS-style margins. AI API cost decreasing. No physical offices needed. Pure digital delivery.</p></div>
+        <div class="card" data-n=""><div class="ctag">Customer Acquisition Cost</div><div class="bnum">PKR<br>800–2,500</div><p>Digital CAC via Facebook, YouTube, Google Search. Organic SEO on English immigration content in Pakistan has near-zero competition.</p></div>
+        <div class="card gold" data-n=""><div class="ctag">Lifetime Value</div><div class="bnum">PKR<br>18K–45K</div><p>12–18 month average subscription duration + referral commissions + report purchases. LTV:CAC ratio of 12–25x is exceptional for a Pakistani SaaS product.</p></div>
+        <div class="card em" data-n=""><div class="ctag">Gross Margin</div><div class="bnum">72–82%</div><p>Software-as-a-Service margins. AI API costs decline with volume. No physical offices required. 100% digital delivery.</p></div>
       </div>
     </div>
     <div>
-      <h3 style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:1.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.07em">Funding Roadmap (PKR)</h3>
+      <h3 style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:1.3rem;font-size:.8rem;text-transform:uppercase;letter-spacing:.07em">Funding Roadmap (PKR)</h3>
       <table class="tbl">
         <thead><tr><th>Round</th><th>Amount (PKR)</th><th>Timing</th><th>Use of Funds</th></tr></thead>
         <tbody>
-          <tr><td><strong>Bootstrapped MVP</strong></td><td>PKR 15–30 lakh</td><td>Month 0–3</td><td>AI model build, basic web app, 500 beta testers, domain + hosting</td></tr>
-          <tr><td><strong>Pre-Seed / Friends</strong></td><td>PKR 50–150 lakh</td><td>Month 3–9</td><td>Android app, Urdu NLP, 5-person team, marketing launch, consultant partnerships</td></tr>
-          <tr><td><strong>Seed Round</strong></td><td>PKR 3–8 crore</td><td>Month 10–18</td><td>Scale to 10K users, B2B API, IELTS partnerships, paid marketing</td></tr>
-          <tr><td><strong>Series A</strong></td><td>PKR 15–40 crore</td><td>Month 24–30</td><td>100K users, Bangladesh/Nepal expansion, government data partnerships</td></tr>
+          <tr><td><strong>Bootstrapped MVP</strong></td><td>PKR 15–30 lakh</td><td>Month 0–3</td><td>Core AI model, basic web app, 500 beta testers, domain and cloud hosting</td></tr>
+          <tr><td><strong>Pre-Seed</strong></td><td>PKR 50–150 lakh</td><td>Month 3–9</td><td>Android app, bilingual NLP, 5-person founding team, marketing launch, first consultant partnerships</td></tr>
+          <tr><td><strong>Seed Round</strong></td><td>PKR 3–8 crore</td><td>Month 10–18</td><td>Scale to 10,000 users, B2B API launch, IELTS partnerships, paid acquisition channels</td></tr>
+          <tr><td><strong>Series A</strong></td><td>PKR 15–40 crore</td><td>Month 24–30</td><td>100,000 users milestone, Bangladesh and Nepal market entry, government data contracts</td></tr>
         </tbody>
       </table>
     </div>
   </div>
 </section>
 
-<!-- ═══ PAGE 7: PRODUCT ROADMAP ═══ -->
+<!-- ════════════════════════════════ PAGE 7: ROADMAP ════════ -->
 <section class="sec reveal" id="roadmap">
   <div class="stag">Page 07 — Product Roadmap</div>
-  <h2>Product <em>Build Karo</em> — Phase by Phase</h2>
-  <p class="sint">Pehle din se revenue generate karne ki strategy. Month 3 mein pehle paying users, Month 12 mein break-even trajectory.</p>
+  <h2>Product <em>Build Strategy</em> — Phase by Phase</h2>
+  <p class="sint">A revenue-generating strategy starting from Month 3. First paying users by Month 3, break-even trajectory established by Month 12, market leadership by Year 3.</p>
 
   <div class="g2a">
     <div class="tlwrap">
       <div class="tlitem" data-ph="1">
         <div class="tph">Phase 1 — Month 1–3 (MVP)</div>
-        <div class="ttl">Core AI Assessment Engine Launch</div>
-        <div class="tbd">Web app build karo jahan user CV upload kare, 15 questions answer kare (age, education, profession, IELTS, family, finances), aur instant AI assessment mile. Top 5 countries + eligibility scores show karo. Urdu + English UI. WhatsApp sharing. Target: 500 beta users, PKR 499 plan launch.</div>
-        <div class="ttgs"><span class="ttg">AI/ML Core</span><span class="ttg">Country Matching</span><span class="ttg">Web App</span><span class="ttg">Urdu UI</span><span class="ttg">WhatsApp Bot</span></div>
+        <div class="ttl">Core AI Assessment Engine</div>
+        <div class="tbd">Build a web app where users upload their CV and answer 15 structured questions (age, education, profession, IELTS score, family situation, financial assets, emigration goal). The AI engine generates an instant eligibility assessment showing the top 5 best-fit countries with individual match percentages. Bilingual interface (English + Urdu). WhatsApp sharing. Target: 500 beta users, PKR 499 plan live.</div>
+        <div class="ttgs"><span class="ttg">AI Core</span><span class="ttg">Country Matching</span><span class="ttg">Web App</span><span class="ttg">Bilingual UI</span><span class="ttg">WhatsApp Bot</span></div>
       </div>
       <div class="tlitem" data-ph="2">
         <div class="tph">Phase 2 — Month 4–8</div>
-        <div class="ttl">Android App + Gap Analysis + Consultants</div>
-        <div class="tbd">Android app launch (Pakistan 94% Android). Profile gap analysis add karo — "Agar IELTS 7.0 kar lo to Canada score 65% se 82% ho jayega." Verified consultant directory add karo with contact/referral system. Pro tier launch. Target: 2,000 paid users.</div>
+        <div class="ttl">Android App + Gap Analysis + Consultant Directory</div>
+        <div class="tbd">Launch Android app (Pakistan is 94% Android market). Add intelligent gap analysis — for example: "Raising your IELTS from 6.5 to 7.0 increases your Canada eligibility score from 65% to 82%." Launch verified consultant directory with referral system. Professional tier live. Target: 2,000 paid subscribers.</div>
         <div class="ttgs"><span class="ttg">Android App</span><span class="ttg">Gap Analysis</span><span class="ttg">Consultant Directory</span><span class="ttg">Pro Tier</span></div>
       </div>
       <div class="tlitem" data-ph="3">
         <div class="tph">Phase 3 — Month 9–15</div>
-        <div class="ttl">B2B API + Country Calculators + Partnerships</div>
-        <div class="tbd">B2B white-label API for immigration consultants — woh apni website par hamara tool embed kar sakte hain. Canada CRS, Australia SkillSelect, UK points calculators add karo. IELTS prep partners (British Council Pakistan) se referral deal karo. Target: 8,000 paid users, 15 B2B clients.</div>
-        <div class="ttgs"><span class="ttg">B2B API</span><span class="ttg">CRS Calculator</span><span class="ttg">IELTS Partners</span><span class="ttg">Referral Engine</span></div>
+        <div class="ttl">B2B API + Country Calculators + Strategic Partnerships</div>
+        <div class="tbd">Launch a white-label B2B API so immigration consultants can embed the assessment tool on their own websites. Add Canada CRS score estimator, Australia SkillSelect calculator, and UK Skilled Worker points checker as standalone tools. Secure referral partnership with British Council Pakistan for IELTS test prep. Target: 8,000 paid users, 15 B2B agency clients.</div>
+        <div class="ttgs"><span class="ttg">B2B API</span><span class="ttg">CRS Calculator</span><span class="ttg">IELTS Partnership</span><span class="ttg">Referral Engine</span></div>
       </div>
       <div class="tlitem" data-ph="4">
         <div class="tph">Phase 4 — Month 16–30</div>
-        <div class="ttl">AI Improvement Coach + Diaspora + Expansion</div>
-        <div class="tbd">"6-month improvement roadmap" feature — AI bataye kya improve karna hai. Overseas Pakistani diaspora segment (family sponsorship assessment). Bangladesh + Nepal market entry — same demographics, zero competition. Target: 30,000 paid users, PKR 1 arab revenue run rate.</div>
-        <div class="ttgs"><span class="ttg">AI Coach</span><span class="ttg">Diaspora</span><span class="ttg">Bangladesh</span><span class="ttg">Nepal</span></div>
+        <div class="ttl">AI Improvement Coach + Diaspora + Regional Expansion</div>
+        <div class="tbd">Launch "6-month improvement roadmap" — AI generates a personalized action plan for users to increase their eligibility score over time. Add Overseas Pakistani diaspora segment (family sponsorship assessment). Enter Bangladesh and Nepal — same demographic profile, same pain points, zero competition. Target: 30,000 paid users, PKR 1 billion annual revenue run rate.</div>
+        <div class="ttgs"><span class="ttg">AI Coach</span><span class="ttg">Diaspora Segment</span><span class="ttg">Bangladesh</span><span class="ttg">Nepal</span></div>
       </div>
     </div>
 
     <div>
-      <h3 style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:1.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.07em">Year 1 Team (Minimum Viable)</h3>
+      <h3 style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:1.3rem;font-size:.8rem;text-transform:uppercase;letter-spacing:.07em">Year 1 Minimum Viable Team</h3>
       <table class="tbl" style="margin-bottom:2rem">
-        <thead><tr><th>Role</th><th>Priority</th><th>PKR Monthly</th></tr></thead>
+        <thead><tr><th>Role</th><th>Priority</th><th>Monthly PKR</th></tr></thead>
         <tbody>
-          <tr><td><strong>AI/ML Engineer</strong><br><small>Country matching model, NLP, scoring</small></td><td><span class="bdg g">Critical</span></td><td>PKR 200K–350K</td></tr>
-          <tr><td><strong>Full-Stack Developer</strong><br><small>Web + Android app</small></td><td><span class="bdg g">Critical</span></td><td>PKR 150K–250K</td></tr>
-          <tr><td><strong>Immigration Data Expert</strong><br><small>Country rules, points systems data input</small></td><td><span class="bdg g">Critical</span></td><td>PKR 80K–150K</td></tr>
-          <tr><td><strong>Growth/Marketing</strong><br><small>Social media, SEO, partnerships</small></td><td><span class="bdg y">Important</span></td><td>PKR 70K–120K</td></tr>
-          <tr><td><strong>Legal/Compliance Advisor</strong><br><small>Ensure no immigration advice is given</small></td><td><span class="bdg y">Important</span></td><td>PKR 50K retainer</td></tr>
+          <tr><td><strong>AI/ML Engineer</strong><br><small>Country matching model, NLP, scoring algorithm</small></td><td><span class="bdg g">Critical</span></td><td>PKR 200K–350K</td></tr>
+          <tr><td><strong>Full-Stack Developer</strong><br><small>Web app + Android app</small></td><td><span class="bdg g">Critical</span></td><td>PKR 150K–250K</td></tr>
+          <tr><td><strong>Immigration Data Expert</strong><br><small>Country rules data: Canada CRS, Australia points, UK salary thresholds</small></td><td><span class="bdg g">Critical</span></td><td>PKR 80K–150K</td></tr>
+          <tr><td><strong>Growth and Marketing Lead</strong><br><small>Social media, SEO, university partnerships</small></td><td><span class="bdg y">Important</span></td><td>PKR 70K–120K</td></tr>
+          <tr><td><strong>Legal and Compliance Advisor</strong><br><small>Ensures platform never crosses into immigration advice territory</small></td><td><span class="bdg y">Important</span></td><td>PKR 50K retainer</td></tr>
         </tbody>
       </table>
 
-      <h3 style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:1.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.07em">Tech Stack</h3>
+      <h3 style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:1.3rem;font-size:.8rem;text-transform:uppercase;letter-spacing:.07em">Recommended Technology Stack</h3>
       <div class="g3" style="gap:1.5px">
-        <div class="card" style="padding:1.1rem" data-n=""><div class="ctag">AI Core</div><p style="font-size:.7rem">Claude API / GPT-4o for profile analysis. Scikit-learn for scoring model. Fine-tune on Pakistan immigration data.</p></div>
-        <div class="card gold" style="padding:1.1rem" data-n=""><div class="ctag">Backend</div><p style="font-size:.7rem">Node.js + Python (FastAPI for AI). PostgreSQL. AWS (Bahrain region for low latency). Redis cache.</p></div>
-        <div class="card em" style="padding:1.1rem" data-n=""><div class="ctag">Mobile</div><p style="font-size:.7rem">React Native (Android-first). Offline-capable. Urdu RTL + English. CV parsing via Affinda API.</p></div>
-        <div class="card sl" style="padding:1.1rem" data-n=""><div class="ctag">Payments</div><p style="font-size:.7rem">JazzCash + Easypaisa (primary). Stripe for diaspora. Recurring billing via Paddle or Chargebee.</p></div>
-        <div class="card bl" style="padding:1.1rem" data-n=""><div class="ctag">Data Layer</div><p style="font-size:.7rem">Real-time immigration points rules DB for 15+ countries. Weekly updates from official government sources.</p></div>
-        <div class="card tl" style="padding:1.1rem" data-n=""><div class="ctag">AI Disclaimer</div><p style="font-size:.7rem">Every assessment output shows: "Yeh AI guidance hai, legal advice nahi. Kisi licensed consultant se zaroor milein."</p></div>
+        <div class="card" style="padding:1.1rem" data-n=""><div class="ctag">AI Core</div><p style="font-size:.7rem">Claude API or GPT-4o for profile analysis and gap reasoning. Scikit-learn for scoring model. Fine-tune on Pakistan immigration data sets.</p></div>
+        <div class="card gold" style="padding:1.1rem" data-n=""><div class="ctag">Backend</div><p style="font-size:.7rem">Node.js + Python FastAPI for AI services. PostgreSQL database. AWS Bahrain region (low latency for Pakistan). Redis for caching.</p></div>
+        <div class="card em" style="padding:1.1rem" data-n=""><div class="ctag">Mobile</div><p style="font-size:.7rem">React Native (Android-first). Offline-capable architecture. Bilingual interface. CV parsing via Affinda or similar API.</p></div>
+        <div class="card sl" style="padding:1.1rem" data-n=""><div class="ctag">Payments</div><p style="font-size:.7rem">JazzCash + Easypaisa as primary payment methods. Stripe for overseas Pakistani users. Recurring billing via Paddle or Chargebee.</p></div>
+        <div class="card bl" style="padding:1.1rem" data-n=""><div class="ctag">Data Layer</div><p style="font-size:.7rem">Maintained immigration rules database for 15+ countries with weekly updates from official government sources. Critical for accuracy.</p></div>
+        <div class="card tl" style="padding:1.1rem" data-n=""><div class="ctag">Legal Safety</div><p style="font-size:.7rem">Every assessment output must display: "This is AI-generated guidance only — not legal immigration advice. Please consult a licensed immigration consultant."</p></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ PAGE 8: TEAM ═══ -->
+<!-- ════════════════════════════════ PAGE 8: TEAM ════════ -->
 <section class="sec alt reveal" id="team">
-  <div class="stag">Page 08 — Team & Execution</div>
-  <h2>Kaun <em>Banayega</em> Yeh Platform?</h2>
-  <p class="sint">Ek lean, high-output founding team jo tech + immigration domain expertise dono cover kare. Baaki roles freelance ya part-time shuru mein.</p>
+  <div class="stag">Page 08 — Team and Execution</div>
+  <h2>Who <em>Builds</em> This Platform?</h2>
+  <p class="sint">A lean, four-person founding team covering both technology and immigration domain expertise. Additional roles can begin as part-time or freelance to preserve runway.</p>
 
   <div class="g4" style="margin-bottom:2.5rem">
-    <div class="card wh" data-n=""><div class="ctag">Co-Founder / CEO</div><h3>Product + Business</h3><p>Immigration industry understanding + Pakistan startup experience. Network: consultants, investors, universities. Responsible: partnerships, sales, fundraising.</p></div>
-    <div class="card wh" data-n=""><div class="ctag">Co-Founder / CTO</div><h3>AI + Engineering</h3><p>ML/AI background, ideally from FAST-NU, LUMS, or IBA. Has built at least one production app. Responsible: AI model, product build, data pipeline.</p></div>
-    <div class="card wh" data-n=""><div class="ctag">Immigration Data Lead</div><h3>Domain Expert</h3><p>Ex-immigration consultant ya BEOE-experienced person. Maintains country rules database — Canada CRS, Australia points, UK salary thresholds. Critical for accuracy.</p></div>
-    <div class="card wh" data-n=""><div class="ctag">Growth Lead</div><h3>Marketing + Community</h3><p>Pakistan digital marketing background. Manages YouTube (Urdu content), Facebook groups, WhatsApp communities, university outreach. Target: 50,000 free users in Year 1.</p></div>
+    <div class="card wh" data-n=""><div class="ctag">Co-Founder / CEO</div><h3>Product and Business Strategy</h3><p>Deep understanding of Pakistan's immigration industry, startup ecosystem, and fundraising. Responsible for partnerships, consultant network building, sales, and investor relations.</p></div>
+    <div class="card wh" data-n=""><div class="ctag">Co-Founder / CTO</div><h3>AI and Engineering</h3><p>Machine learning and software engineering background, ideally from FAST-NU, LUMS, or IBA. Has shipped at least one production application. Responsible for the AI model, product build, and data pipeline.</p></div>
+    <div class="card wh" data-n=""><div class="ctag">Immigration Data Lead</div><h3>Domain Expert</h3><p>Former immigration consultant or BEOE-experienced professional. Builds and maintains the country rules database — Canada CRS weights, Australia SkillSelect points, UK salary thresholds, Germany requirements. Accuracy depends on this role.</p></div>
+    <div class="card wh" data-n=""><div class="ctag">Growth Lead</div><h3>Marketing and Community</h3><p>Pakistan digital marketing background. Manages YouTube channel (bilingual content), Facebook groups, WhatsApp communities, and university campus outreach. Primary goal: 50,000 free registered users by end of Year 1.</p></div>
   </div>
 
   <div class="hbox">
-    <h4 style="font-family:'Syne',sans-serif;font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);margin-bottom:.8rem">Founder Ke Liye Critical Advisory Board</h4>
-    <p style="font-size:.78rem;line-height:1.78">Ek licensed immigration lawyer ya BEOE-registered consultant ko board mein lao (equity: 0.5–1%) — woh ensure kare ke platform kabhi inadvertently immigration advice na de. Ek data privacy lawyer bhi zaroor ho — CV data handle karna sensitive hai aur Pakistan ka upcoming Personal Data Protection Act compliance zaroori hai. Ek fintech founder bhi helpful hoga JazzCash/Easypaisa integration ke liye.</p>
+    <h4 style="font-family:'Syne',sans-serif;font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);margin-bottom:.8rem">Critical Advisory Board Requirements</h4>
+    <p style="font-size:.76rem;line-height:1.78">Bring a licensed immigration lawyer or BEOE-registered consultant onto the advisory board (0.5–1% equity) to ensure the platform never inadvertently crosses into immigration legal advice territory. Also include a data privacy lawyer familiar with Pakistan's upcoming Personal Data Protection Act, as CV data is highly sensitive and compliance from Day 1 is a competitive advantage. A fintech founder familiar with JazzCash and Easypaisa integration mechanics is also recommended.</p>
   </div>
 </section>
 
-<!-- ═══ PAGE 9: RISKS ═══ -->
+<!-- ════════════════════════════════ PAGE 9: RISKS ════════ -->
 <section class="sec reveal" id="risks">
   <div class="stag">Page 09 — Risk Assessment</div>
-  <h2>Risks <em>Aur</em> Mitigations</h2>
-  <p class="sint">Transparent risk register. Har risk ke liye clear mitigation plan hai. Investors ko yeh dekhna chahiye.</p>
+  <h2>Risks and <em>Mitigation Plans</em></h2>
+  <p class="sint">A transparent risk register for investors. Every material risk is identified with likelihood, impact, and a concrete mitigation strategy already built into the business plan.</p>
 
   <table class="tbl">
-    <thead><tr><th>Risk</th><th>Likelihood</th><th>Impact</th><th>Mitigation Strategy</th></tr></thead>
+    <thead><tr><th>Risk Factor</th><th>Likelihood</th><th>Impact</th><th>Mitigation Strategy</th></tr></thead>
     <tbody>
       <tr>
-        <td><strong>Regulatory Misclassification</strong><br><small>BEOE ya FIA platform ko "immigration service" classify kare</small></td>
-        <td><span class="bdg y">Medium</span></td>
-        <td><span class="bdg r">High</span></td>
-        <td>Day 1 se clear legal opinion lo. Platform structure "information tool" as — not advice. Har screen par disclaimer. BEOE ke saath proactive meeting karo before launch. Licensed consultant partnership from Day 1.</td>
+        <td><strong>Regulatory Misclassification</strong><br><small>BEOE or FIA classifies platform as an "immigration service" requiring licensing</small></td>
+        <td><span class="bdg y">Medium</span></td><td><span class="bdg r">High</span></td>
+        <td>Obtain a formal legal opinion before launch classifying the platform as an "information technology tool." Add prominent disclaimers on every screen. Proactively meet with BEOE before launch. Partner with a licensed consultant on Day 1 to demonstrate the referral-only model.</td>
       </tr>
       <tr>
-        <td><strong>AI Accuracy / Wrong Country Suggestion</strong><br><small>AI galat country suggest kare — user paise waste kare</small></td>
-        <td><span class="bdg y">Medium</span></td>
-        <td><span class="bdg y">Medium</span></td>
-        <td>Hamesha confidence score show karo ("78% match — please verify with consultant"). Prominent disclaimer on every output. Weekly rules database updates. User feedback loop for accuracy improvement. No guarantee language ever used.</td>
+        <td><strong>AI Inaccuracy / Wrong Country Recommendation</strong><br><small>AI recommends a country the user is not eligible for — user wastes money</small></td>
+        <td><span class="bdg y">Medium</span></td><td><span class="bdg y">Medium</span></td>
+        <td>Always display a confidence score alongside recommendations — e.g. "78% match — verify with a consultant before applying." Weekly updates to country rules database. User feedback loop for continuous accuracy improvement. Never use guaranteed or approved language in any output.</td>
       </tr>
       <tr>
-        <td><strong>Immigration Policy Changes</strong><br><small>Canada/UK tighten immigration — demand kum hogi</small></td>
-        <td><span class="bdg r">High</span></td>
-        <td><span class="bdg y">Medium</span></td>
-        <td>Multi-corridor strategy — no single country dependence. Gulf market (730K/yr) is always open. Policy changes actually INCREASE demand for guidance tools — people need to know "what now?"</td>
+        <td><strong>Destination Country Policy Changes</strong><br><small>Canada or UK tighten immigration — demand for those pathways decreases</small></td>
+        <td><span class="bdg r">High</span></td><td><span class="bdg y">Medium</span></td>
+        <td>Multi-corridor strategy — never depend on a single country. Gulf corridor (730,000+ placements/year) is always open. Policy tightening actually increases demand for guidance tools — people urgently need to know what options remain for them.</td>
       </tr>
       <tr>
-        <td><strong>Low Willingness to Pay</strong><br><small>PKR 499/month bhi zyada lagta hai some users ko</small></td>
-        <td><span class="bdg y">Medium</span></td>
-        <td><span class="bdg y">Medium</span></td>
-        <td>Freemium model. Value proposition: "Consultant charges PKR 300K+ — hum PKR 499 mein initial assessment dete hain." B2B revenue (consultant API) supplements B2C. One-time report purchase option (PKR 999) for non-subscribers.</td>
+        <td><strong>Low Willingness to Pay</strong><br><small>Even PKR 499/month feels expensive for lower-income users</small></td>
+        <td><span class="bdg y">Medium</span></td><td><span class="bdg y">Medium</span></td>
+        <td>Freemium model lowers the barrier to entry. Value proposition is clear: "Consultants charge PKR 300,000+ — we provide the initial assessment for PKR 499." B2B revenue from consultant API supplements any shortfall in B2C conversion. PKR 999 one-time report option for non-subscribers.</td>
       </tr>
       <tr>
-        <td><strong>Data Privacy / CV Data Breach</strong><br><small>User CV data sensitive hai — breach reputational damage</small></td>
-        <td><span class="bdg g">Low</span></td>
-        <td><span class="bdg r">High</span></td>
-        <td>End-to-end encryption from Day 1. No CV data sold ever. Pakistan PDPO compliance. AWS Bahrain region (data sovereignty). Clear privacy policy in Urdu + English. Opt-in only for any data sharing. ISO 27001 target Year 2.</td>
+        <td><strong>CV Data Privacy Breach</strong><br><small>User CV data is highly sensitive — a breach would cause serious reputational damage</small></td>
+        <td><span class="bdg g">Low</span></td><td><span class="bdg r">High</span></td>
+        <td>End-to-end encryption from Day 1. Strict policy: CV data is never sold. Pakistan PDPO compliance built in from the start. AWS Bahrain region for data residency. Clear privacy policy in both English and Urdu. ISO 27001 certification targeted in Year 2.</td>
       </tr>
       <tr>
-        <td><strong>Copycat Competition</strong><br><small>Kaizen ya Superior Consulting AI feature add kar le</small></td>
-        <td><span class="bdg y">Medium</span></td>
-        <td><span class="bdg g">Low</span></td>
-        <td>18–24 month first-mover advantage. Urdu NLP training data moat. Proprietary user assessment history (data flywheel). Brand trust as "Pakistan's #1 AI immigration assessment" — once established, hard to displace. Speed of iteration is key.</td>
+        <td><strong>Copycat Competition</strong><br><small>An existing consultant firm like Kaizen or Superior adds an AI feature</small></td>
+        <td><span class="bdg y">Medium</span></td><td><span class="bdg g">Low</span></td>
+        <td>18–24 month first-mover advantage. Proprietary Urdu NLP training data creates a durable moat. User assessment history forms a data flywheel that improves the model over time. Building the "Pakistan's #1 AI immigration assessment" brand quickly is the primary defense — once established, it is extremely difficult to displace.</td>
       </tr>
       <tr>
-        <td><strong>Internet Shutdowns / Low Speed</strong><br><small>Pakistan mein occasional internet disruptions</small></td>
-        <td><span class="bdg y">Medium</span></td>
-        <td><span class="bdg g">Low</span></td>
-        <td>Offline-capable Android app. Assessment cached locally. WhatsApp bot as SMS fallback. 157M broadband users growing — this risk is diminishing rapidly. Results exportable as PDF for offline reference.</td>
+        <td><strong>Internet Disruptions</strong><br><small>Pakistan occasionally experiences internet slowdowns or brief shutdowns</small></td>
+        <td><span class="bdg y">Medium</span></td><td><span class="bdg g">Low</span></td>
+        <td>Offline-capable Android app with locally cached assessments. WhatsApp bot as a reliable fallback channel. Assessment results exportable as PDF for offline reference. With 157M broadband subscribers growing rapidly, this risk is diminishing steadily.</td>
       </tr>
     </tbody>
   </table>
 </section>
 
-<!-- ═══ PAGE 10: VERDICT ═══ -->
+<!-- ════════════════════════════════ PAGE 10: VERDICT ════════ -->
 <section class="verdict reveal" id="verdict">
   <div class="vgrid">
     <div class="vscore">
@@ -826,182 +844,181 @@ footer{background:var(--ink);color:rgba(243,239,228,.35);padding:2.6rem 5rem;dis
     </div>
 
     <div class="vc">
-      <h2>Final Verdict:<br><em>Banao Yeh. Abhi.</em><br>Window Open Hai.</h2>
+      <h2>Final Verdict:<br><em>Build This. Now.</em><br>The Window Is Open.</h2>
 
       <div class="vblk hl">
-        <h4>Sabse Important Baat — Yeh Kya Exactly Hai</h4>
-        <p>Aap immigration service company nahi bana rahe — aap Pakistan ka <strong>"Country Fit Assessment Engine"</strong> bana rahe hain. Bilkul waise jaise Rozee.pk ne job matching kiya, aap immigration matching karte ho. Yeh positioning investors ke liye clear, regulators ke liye safe, aur users ke liye compelling hai. Yeh distinction hi aapka sabse bada strategic asset hai.</p>
+        <h4>The Single Most Important Strategic Point</h4>
+        <p>You are not building an immigration services company — you are building Pakistan's <strong>"Country Fit Assessment Engine."</strong> Just as Rozee.pk created a new category for job matching in Pakistan, ImmigAI.pk creates a new category for immigration profile matching. This positioning is clear for investors, legally safe from regulators, and genuinely compelling for users. This distinction is your single most valuable strategic asset — protect it.</p>
       </div>
 
       <div class="vblk">
         <h4>Why the Score Is 9.4 — Not 10</h4>
-        <p>The 0.6 gap comes from two genuine risks: (1) regulatory gray area requires careful legal structuring from Day 1, and (2) monetization depends on users understanding the difference between "assessment tool" and "immigration service" — which requires consistent, clear communication. Both are manageable — but they require deliberate attention, not an afterthought.</p>
+        <p>The 0.6 gap is attributable to two genuine risks: first, the regulatory gray area requires careful legal structuring on Day 1 — one wrong screen or feature could reclassify the platform as an immigration service. Second, monetization depends on users clearly understanding the difference between an assessment tool and an immigration service, which requires consistent and deliberate communication across every touchpoint. Both risks are fully manageable with the right attention — they are not showstoppers.</p>
       </div>
 
       <div class="vblk">
-        <h4>Competitors Ke Baare Mein Sach</h4>
-        <p>Pakistan ke tamam immigration consultants abhi bhi phone calls aur meetings per depend karte hain. Kisi ke paas AI-powered, self-service, instant assessment tool nahi hai. Jab user 3 AM ko socha ke "mujhe Canada jana hai, kya main qualify karta hun?" — aapka app answer dega. Competitor kal subah call karega. Yeh window at least 18–24 months khuli hai.</p>
+        <h4>The Competitive Reality</h4>
+        <p>Every immigration consultant in Pakistan still relies on phone calls and in-person meetings for assessments. Not one has built a self-service, AI-powered, instant assessment tool. When a user at 3 AM thinks "I want to move to Canada — do I qualify?" — your app answers that question immediately. Your competitor calls them back the next morning. This window is open for at least 18–24 months before any well-funded competitor could replicate it.</p>
       </div>
 
       <div class="vblk">
-        <h4>Revenue Reality Check — PKR Mein</h4>
-        <p>Year 1 mein PKR 2.88 crore (~$100K USD) realistic hai. Year 3 mein PKR 64 crore (~$2.3M) is the inflection point. Year 5 mein PKR 3.6 arab (~$13M) is achievable with Bangladesh/Nepal expansion. Pakistani startup exits are typically 3–5x revenue — a Year 5 exit at PKR 10–18 arab (USD 35–65M) is the realistic target for a strategic acquirer.</p>
+        <h4>Five-Year Revenue Reality Check</h4>
+        <p>Year 1 generates approximately PKR 2.88 crore (~$103,000 USD) — a realistic, defensible starting point. Year 3 at PKR 64 crore (~$2.3M USD) is the inflection point where the business becomes clearly profitable. Year 5 at PKR 3.6 billion (~$13M USD) is achievable with Bangladesh and Nepal expansion. Pakistani tech startup exits are typically valued at 3–5x revenue — a Year 5 exit at PKR 10–18 billion (USD 35–65M) is a realistic target for a strategic acquirer.</p>
       </div>
 
       <div class="vblk">
-        <h4>Ek Cheez Jo Zaroor Karo</h4>
-        <p>Launch se pehle ek licensed immigration lawyer se formal legal opinion lo jo clearly state kare ke aapka platform "information technology tool" hai na ke "immigration legal service." Yeh single document aapko 90% regulatory risk se protect karta hai aur investors ke liye bhi comfort letter ka kaam karta hai.</p>
+        <h4>The One Thing You Must Do Before Launch</h4>
+        <p>Obtain a formal written legal opinion from a qualified Pakistani lawyer before going live. This document should clearly state that the platform is classified as an "information technology tool" and not an "immigration advisory or legal service." This single document provides protection against 90% of your regulatory risk and also serves as a comfort letter for early-stage investors who will ask about this issue immediately.</p>
       </div>
 
       <div class="vbtns">
-        <a href="#what" class="btn-p">← Platform Definition Dekhein</a>
-        <a href="#prompt" class="btn-s">AI System Prompt →</a>
+        <a href="#what" class="btn-p">← Platform Definition</a>
+        <a href="#prompt" class="btn-s">View AI System Prompt →</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ PAGE 11: FULL AI SYSTEM PROMPT ═══ -->
+<!-- ════════════════════════════════ PAGE 11: AI SYSTEM PROMPT ════════ -->
 <section class="psec reveal" id="prompt">
-  <div class="stag" style="color:var(--gold-lt)">Page 11 — AI System Prompt</div>
-  <h2 style="color:var(--paper);font-family:'Fraunces',serif;font-weight:900;margin-bottom:.4rem">Complete <em style="color:var(--gold)">AI Prompt</em></h2>
-  <p style="font-size:.8rem;color:rgba(243,239,228,.55);margin-bottom:2.5rem;font-weight:400">Yeh woh exact system prompt hai jo aap apne AI model (Claude/GPT-4o) ko denge. Copy-paste ready hai.</p>
+  <div class="stag" style="color:var(--gold-lt)">Page 11 — Full AI System Prompt</div>
+  <h2 style="color:var(--paper);font-family:'Fraunces',serif;font-weight:900;margin-bottom:.4rem">The Complete <em style="color:var(--gold)">AI Prompt</em></h2>
+  <p style="font-size:.8rem;color:rgba(243,239,228,.55);margin-bottom:2.5rem;font-weight:400">This is the exact system prompt you provide to your AI model (Claude or GPT-4o). Copy-paste ready. All instructions are in English — the AI model handles bilingual output to users independently.</p>
 
   <div class="pbox">
-    <p>You are the AI assessment engine for <code>ImmigAI.pk</code> — Pakistan's first AI-powered immigration profile assessment and country-matching platform. Your job is to analyze a user's profile (CV, education, work experience, language scores, age, family, finances) and recommend the best-fit countries and visa pathways for them.</p>
+    <p>You are the AI assessment engine for <code>ImmigAI.pk</code> — Pakistan's first AI-powered immigration profile assessment and country-matching platform. Your job is to analyze a user's professional and personal profile and recommend the best-fit countries and visa pathways based entirely on their individual data.</p>
 
-    <div class="warning">
-      <strong>⚠️ CRITICAL LEGAL BOUNDARY — NEVER CROSS THIS LINE:</strong><br>
-      You are NOT an immigration lawyer, immigration consultant, or immigration advisor. You do NOT provide legal immigration advice. You NEVER tell users their application will be approved. You NEVER tell users exactly how to apply. You ALWAYS end every assessment with: "Yeh AI-generated guidance hai, legal immigration advice nahi. Kisi BEOE-registered ya licensed immigration consultant se zaroor milein apna case finalize karne se pehle." Every response must include this disclaimer.
+    <div class="warn">
+      <strong>⚠️ CRITICAL LEGAL BOUNDARY — YOU MUST NEVER CROSS THIS LINE:</strong><br>
+      You are NOT an immigration lawyer, immigration consultant, or immigration advisor. You do NOT provide legal immigration advice of any kind. You NEVER tell a user that their application will be approved or rejected. You NEVER instruct users on exactly how to apply for a visa. You ALWAYS conclude every assessment output with the following disclaimer: "This is AI-generated eligibility guidance only — it is not legal immigration advice. Please consult a BEOE-registered or licensed immigration consultant before making any decisions or submitting any applications." This disclaimer must appear on every single response without exception.
     </div>
 
-    <h4>Your Identity and Scope</h4>
+    <h4>Your Role and Scope</h4>
     <ul>
-      <li>You are an AI profile assessment tool — like a "fitness tracker for immigration eligibility"</li>
-      <li>You ANALYZE profiles and MATCH them to countries based on official immigration points systems</li>
-      <li>You SUGGEST which countries are a good fit — you do NOT process applications or give legal advice</li>
-      <li>You help users understand WHAT to improve (IELTS score, work experience, age factor) — not HOW to apply</li>
-      <li>Your role ends at "Country X is a <code>78% match</code> for your profile" — the consultant takes it from there</li>
-      <li>You speak in a mix of <strong>Urdu and English (Roman Urdu)</strong> unless user speaks only English</li>
+      <li>You are an AI profile assessment tool — think of yourself as a "fitness tracker for immigration eligibility"</li>
+      <li>You ANALYZE user profiles and MATCH them to countries based on official, publicly available immigration points systems and eligibility criteria</li>
+      <li>You SUGGEST which countries are the best fit for a user's profile — you do NOT process applications, prepare documents, or give legal advice</li>
+      <li>You help users understand WHAT they need to improve (IELTS band, years of work experience, age factor) — not HOW to apply or submit documents</li>
+      <li>Your role ends at the statement "Country X appears to be a strong match for your profile at approximately 78% eligibility" — the licensed consultant takes it from there</li>
+      <li>You respond in English by default. If the user writes in Urdu or Roman Urdu, you may respond bilingually (English primary, Urdu in parentheses where helpful), but never in Urdu only</li>
     </ul>
 
-    <h4>Profile Input — What You Need From the User</h4>
+    <h4>Profile Data to Collect from the User</h4>
     <ul>
-      <li><strong>Education:</strong> Highest degree, field, institution, country, year — e.g. "BSc Computer Science, FAST-NU Karachi, 2020"</li>
-      <li><strong>Work Experience:</strong> Total years, current job title, industry, NOC/ANZSCO code if known — e.g. "5 years, Software Engineer, IT sector"</li>
-      <li><strong>Language Scores:</strong> IELTS band (or TOEFL, PTE, French DELF if applicable) — e.g. "IELTS 7.0 overall"</li>
-      <li><strong>Age:</strong> Current age in years — e.g. "29 years old"</li>
-      <li><strong>Marital Status + Family:</strong> Single / Married, number of children — affects family immigration options</li>
-      <li><strong>Financial Assets:</strong> Approximate savings / assets in PKR — affects investor visas and proof of funds</li>
-      <li><strong>Current Location:</strong> Province / city — Karachi, Lahore, Islamabad, other</li>
-      <li><strong>Preferred Country (if any):</strong> Any existing preference or family connections abroad</li>
-      <li><strong>Key Goal:</strong> Work, study, PR/permanent residency, family reunification, investment</li>
+      <li><strong>Education:</strong> Highest degree completed, field of study, institution name, country of study, year of graduation — e.g. "BSc Computer Science, FAST-NU Karachi, 2020"</li>
+      <li><strong>Work Experience:</strong> Total years of work experience, current or most recent job title, industry sector, NOC or ANZSCO occupation code if known — e.g. "5 years, Software Engineer, Information Technology sector"</li>
+      <li><strong>Language Test Scores:</strong> IELTS overall band score and individual scores, or TOEFL, PTE, or DELF scores if applicable — e.g. "IELTS 7.0 overall, Listening 7.5, Reading 7.0, Writing 6.5, Speaking 7.0"</li>
+      <li><strong>Age:</strong> Current age in whole years — e.g. "29 years old"</li>
+      <li><strong>Marital Status and Family:</strong> Single or married, number of dependent children — this significantly affects family immigration pathway eligibility</li>
+      <li><strong>Financial Assets:</strong> Approximate total savings and assets in PKR — this affects investor visa eligibility and proof of funds requirements</li>
+      <li><strong>Current Location:</strong> Province and city — Karachi, Lahore, Islamabad, Peshawar, other</li>
+      <li><strong>Existing Country Preference:</strong> Any destination preference or existing family or professional connections abroad</li>
+      <li><strong>Primary Emigration Goal:</strong> Skilled work, higher education, permanent residency, family reunification, business investment, or general lifestyle improvement</li>
     </ul>
 
-    <h4>Countries You Assess Against (with Scoring Criteria)</h4>
+    <h4>Countries and Scoring Criteria You Assess Against</h4>
     <ul>
-      <li><strong>Canada:</strong> Express Entry CRS score (max 1,200 pts) — education, age, language, experience, adaptability. Assess CRS estimate. Check PNP streams if federal CRS is low.</li>
-      <li><strong>Australia:</strong> SkillSelect points (min 65 to apply) — age, English, experience, education, Australian study, regional study, partner skills. State nomination options.</li>
-      <li><strong>UK:</strong> Skilled Worker Visa — job offer required + salary threshold (£38,700 min 2024). Student visa: IELTS 5.5–6.0+. Check if profession is on shortage occupation list.</li>
-      <li><strong>Germany:</strong> Job Seeker Visa (6-month stay to find job) — university degree + 5 years experience + German/English required. EU Blue Card: job offer + salary €45,300+.</li>
-      <li><strong>UAE/Saudi Arabia:</strong> Employer-sponsored work visa — profession match + salary offer. No PR path. Best for mid-career professionals seeking quick employment abroad.</li>
-      <li><strong>New Zealand:</strong> Skilled Migrant Category — points-based (min 100 pts Expression of Interest). Healthcare, IT, engineering high demand.</li>
-      <li><strong>Portugal:</strong> D7 Visa (passive income), Digital Nomad Visa, Golden Visa (investment €500K+). EU access after 5 years.</li>
-      <li><strong>Turkey:</strong> Work permit + Turkish Citizenship by Investment ($400K property). Easy access for Pakistanis. No language test required.</li>
+      <li><strong>Canada:</strong> Express Entry Comprehensive Ranking System (CRS) score estimation (maximum 1,200 points). Key factors: education, age, language, Canadian work experience, adaptability. Also check Provincial Nominee Programs (PNPs) if federal CRS score is relatively low. Popular for skilled professionals and IT workers.</li>
+      <li><strong>Australia:</strong> SkillSelect points-based system (minimum 65 points required to lodge an Expression of Interest). Key factors: age, English proficiency, work experience, Australian study, regional study bonus, partner skills. State nomination options can add 5 additional points.</li>
+      <li><strong>United Kingdom:</strong> Skilled Worker Visa requires a confirmed job offer and minimum salary threshold (£38,700 as of 2024). Student visa requires IELTS 5.5–6.0 minimum. Check whether the user's occupation appears on the UK shortage occupation list for potential salary threshold waivers.</li>
+      <li><strong>Germany:</strong> Job Seeker Visa (6-month stay to find employment) requires a recognized university degree and 5+ years of relevant experience. EU Blue Card requires a confirmed job offer with salary above €45,300 per year. German language proficiency is beneficial but not always mandatory for IT roles.</li>
+      <li><strong>UAE and Saudi Arabia:</strong> Employer-sponsored work visas require a profession match with an active job offer. No permanent residency pathway exists. Best suited for mid-career professionals seeking immediate overseas employment. Saudi Arabia remains the top destination for Pakistani workers by volume.</li>
+      <li><strong>New Zealand:</strong> Skilled Migrant Category is points-based with a minimum Expression of Interest score of 100 points. High demand for healthcare, information technology, and engineering professionals.</li>
+      <li><strong>Portugal:</strong> D7 Passive Income Visa, Digital Nomad Visa (for remote workers), and Golden Visa (investment of €500,000+). Provides access to EU residency and eventual citizenship after 5 years.</li>
+      <li><strong>Turkey:</strong> Employer-sponsored work permit available. Turkish citizenship by real estate investment ($400,000 minimum). Relatively straightforward process for Pakistani applicants. No language test requirement for most work permits.</li>
     </ul>
 
-    <h4>Assessment Output Format</h4>
+    <h4>Required Assessment Output Format</h4>
     <ul>
-      <li>Always show: <strong>Top 3–5 best-fit countries</strong> with percentage match score (e.g. "Canada: 74% match")</li>
-      <li>For each country show: <strong>Best visa pathway, key eligibility criteria met, gaps to fill</strong></li>
-      <li>Show a <strong>Profile Strength Score</strong> (0–100): e.g. "Aapka overall profile strength: 68/100"</li>
-      <li>Show a <strong>Gap Analysis</strong>: "Agar IELTS 7.5 kar lo, Canada score 74% se 86% ho jayega"</li>
-      <li>Always end with <strong>Consultant Referral CTA</strong>: "Aage badhne ke liye hamari platform par verified consultants se milein"</li>
-      <li>NEVER give specific government form numbers, application links, or step-by-step application instructions</li>
-      <li>NEVER say "aapka visa approve ho jayega" — always use "aapki eligibility achhi hai" language</li>
+      <li>Always present the <strong>Top 3–5 best-fit countries</strong> with a numeric match percentage — e.g. "Canada: 74% eligibility match"</li>
+      <li>For each recommended country, specify: <strong>the most suitable visa pathway, the key eligibility criteria the user meets, and the specific gaps they need to address</strong></li>
+      <li>Display an overall <strong>Profile Strength Score</strong> out of 100 — e.g. "Overall Profile Strength: 68/100"</li>
+      <li>Provide a clear <strong>Gap Analysis</strong> with quantified impact — e.g. "Improving your IELTS from 6.5 to 7.5 would increase your Canada eligibility score from 74% to 88%"</li>
+      <li>End every response with a <strong>Consultant Referral Call-to-Action</strong> — e.g. "To take the next step, browse our verified licensed consultants on the ImmigAI.pk platform who specialize in your top-matched country"</li>
+      <li>NEVER provide specific government form names, portal links, step-by-step application instructions, or processing fee amounts — this crosses into immigration advisory territory</li>
+      <li>NEVER use language such as "your visa will be approved," "you will definitely qualify," or "you are guaranteed to succeed"</li>
     </ul>
 
-    <h4>Tone and Language Guidelines</h4>
+    <h4>Tone and Communication Style</h4>
     <ul>
-      <li>Speak in warm, encouraging Roman Urdu mixed with English — like a knowledgeable friend, not a lawyer</li>
-      <li>Use simple words. Avoid legal jargon. Example: "Express Entry mein aapka CRS score 420 ke around hoga" — not "pursuant to IRCC regulations..."</li>
-      <li>Be honest about limitations: "Germany ke liye German language seekhna padega — yeh 6–12 months ka commitment hai"</li>
-      <li>Never be discouraging — always show what IS possible and what to improve</li>
-      <li>Approximate words to always include: "suggest", "recommend", "profile fit", "eligibility estimate", "likely suitable" — never "guaranteed", "will get", "approved"</li>
+      <li>Maintain a warm, encouraging, and professional tone — like a knowledgeable and honest friend explaining your options, not a legal document</li>
+      <li>Use simple, accessible language. Avoid legal jargon. Example: "Your Canada Express Entry CRS score would be approximately 420 based on your profile" — NOT "pursuant to IRCC Regulations Section 12 subsection..."</li>
+      <li>Be honest about difficult realities: "Germany would require you to learn German to B1 level, which typically takes 6–12 months of dedicated study. This is worth factoring into your timeline."</li>
+      <li>Never discourage a user — always frame the response around what IS possible and what specific improvements would unlock higher-scoring pathways</li>
+      <li>Always use qualifying language: "suggest," "recommend," "appears to be a strong match," "estimated eligibility," "likely suitable" — never use "guaranteed," "will qualify," "will be approved," or "confirmed"</li>
     </ul>
 
-    <h4>Example Assessment Response Structure</h4>
+    <h4>Example Assessment Output Structure</h4>
     <ul>
-      <li><code>🎯 Profile Strength Score: 72/100</code></li>
-      <li><code>🌍 Top Country Matches:</code> 1. Canada (Express Entry) — 78% | 2. Australia (SkillSelect) — 71% | 3. Germany (Job Seeker) — 58%</li>
-      <li><code>✅ Aapki Strengths:</code> Strong IT background, young age (29), IELTS 7.0</li>
-      <li><code>⚠️ Profile Gaps:</code> Canada ke liye IELTS 7.5+ better hota | Australian skills assessment (ACS) pending hai</li>
-      <li><code>📈 Improvement Plan:</code> IELTS ek band improve karo → Canada score 78% to 88% ho jata</li>
-      <li><code>👨‍💼 Next Step:</code> Hamari platform par Canada-specialist verified consultants dekhen apna case aage badhane ke liye</li>
-      <li><code>⚠️ Disclaimer:</code> Yeh AI-generated eligibility estimate hai. Yeh legal immigration advice nahi. BEOE-registered consultant se zaroor milein.</li>
+      <li><code>🎯 Overall Profile Strength: 72 / 100</code></li>
+      <li><code>🌍 Top Country Matches:</code> 1. Canada (Express Entry) — 78% | 2. Australia (SkillSelect) — 71% | 3. Germany (Job Seeker Visa) — 58%</li>
+      <li><code>✅ Key Strengths in Your Profile:</code> Strong IT background in a high-demand occupation, favorable age of 29, IELTS 7.0 meets most thresholds</li>
+      <li><code>⚠️ Profile Gaps Identified:</code> Canada Skilled Worker stream prefers IELTS 7.5+ | Australian skills assessment (ACS) not yet completed — this is required before lodging an EOI</li>
+      <li><code>📈 Improvement Roadmap:</code> Improving IELTS from 7.0 to 7.5 would increase your Canada score from 78% to 88%. Completing ACS assessment would open Australia pathway fully.</li>
+      <li><code>👨‍💼 Recommended Next Step:</code> Browse Canada and Australia specialist consultants on ImmigAI.pk to begin your formal application process.</li>
+      <li><code>⚠️ Important Disclaimer:</code> This assessment is AI-generated eligibility guidance only. It is not legal immigration advice. Please consult a BEOE-registered or licensed immigration consultant before submitting any application.</li>
     </ul>
 
-    <hr class="section-divider">
+    <hr class="sdiv">
 
-    <h4>What You Must Never Do — Hard Rules</h4>
+    <h4>Hard Rules — What You Must Never Do Under Any Circumstances</h4>
     <ul>
-      <li>❌ Never fill out or help fill out any immigration application form</li>
-      <li>❌ Never give specific government portal links (canada.ca, homeoffice.gov.uk etc.)</li>
-      <li>❌ Never tell user their application will be accepted or rejected</li>
-      <li>❌ Never act as a legal representative or immigration advisor</li>
-      <li>❌ Never suggest unofficial immigration pathways, agents, or brokers</li>
-      <li>❌ Never collect or store specific passport numbers, CNIC, or financial account details</li>
-      <li>❌ Never provide advice that could constitute "immigration legal advice" under Pakistan or destination country law</li>
+      <li>❌ Never help a user fill out or prepare any immigration application form</li>
+      <li>❌ Never provide links to government immigration portals (ircc.canada.ca, homeoffice.gov.uk, immi.homeaffairs.gov.au, etc.)</li>
+      <li>❌ Never tell a user that their application will be accepted, approved, or successful</li>
+      <li>❌ Never act in any capacity as a legal representative, immigration advisor, or immigration consultant</li>
+      <li>❌ Never recommend or endorse unofficial immigration routes, unlicensed agents, or human smuggling channels</li>
+      <li>❌ Never request or store a user's passport number, CNIC number, bank account details, or other sensitive identity documents</li>
+      <li>❌ Never provide information that could reasonably be construed as "immigration legal advice" under Pakistani law or the laws of any destination country</li>
     </ul>
 
-    <h4>Platform Identity for All Outputs</h4>
+    <h4>Platform Identity Information for All Outputs</h4>
     <ul>
       <li>Platform name: <code>ImmigAI.pk</code></li>
-      <li>Tagline: <code>"Apna Profile Scan Karo. Best Country Jano."</code></li>
-      <li>Support: <code>support@immigrai.pk</code></li>
-      <li>Disclaimer (must appear on every assessment): <code>"ImmigAI.pk ek AI assessment tool hai. Yeh immigration legal advice nahi hai. Apni actual application ke liye kisi licensed immigration consultant se milein."</code></li>
+      <li>Platform tagline: <code>"Upload Your CV. Discover Your Best-Fit Country."</code></li>
+      <li>Support email: <code>support@immigrai.pk</code></li>
+      <li>Mandatory disclaimer on every assessment output: <code>"ImmigAI.pk is an AI-powered profile assessment tool. This output is guidance only — it is not immigration legal advice. For your actual application, please consult a licensed immigration consultant."</code></li>
     </ul>
   </div>
 </section>
 
-<!-- ═══ FOOTER ═══ -->
+<!-- ════════════════════════════════ FOOTER ════════ -->
 <footer>
   <div>
-    <strong style="font-family:'Syne',sans-serif;color:rgba(243,239,228,.75);display:block;margin-bottom:.4rem">ImmigAI.pk — AI Profile Assessment Platform | Investor Dashboard v3</strong>
-    Data sources: BEOE 2024, PIDE 2022/2025, State Bank of Pakistan FY2025, NADRA 2025/26, Euro Immigration Consultants, Superior Consulting, Immigration Experts PK, Kaizen Immigration, AINiT, KORUU, ZANS Group, WSL Consultants, Pakistan Bureau of Statistics 2025. Research: March 2026.<br>
+    <strong style="font-family:'Syne',sans-serif;color:rgba(243,239,228,.75);display:block;margin-bottom:.4rem">ImmigAI.pk — AI Profile Assessment Platform | Complete Investor Dashboard</strong>
+    Data sources: BEOE 2024, PIDE 2022/2025, State Bank of Pakistan FY2025, NADRA 2025–26, Euro Immigration Consultants PK, Superior Consulting, Immigration Experts PK, Kaizen Immigration, AINiT Consultancy, KORUU Consultants, ZANS Group, WSL Consultants, Pakistan Bureau of Statistics 2025. Research compiled: March 2026.<br>
     <strong style="color:rgba(243,239,228,.5)">⚠️ This platform does not provide immigration legal services. Users must consult a licensed consultant for actual applications.</strong>
   </div>
   <div style="text-align:right">
     <div style="font-size:.6rem;color:rgba(243,239,228,.45);margin-bottom:.25rem">Opportunity Score</div>
     <div style="font-family:'Fraunces',serif;font-weight:900;font-size:2.2rem;color:var(--gold)">9.4/10</div>
-    <div style="font-size:.6rem;color:rgba(243,239,228,.3)">AI Assessment Tool — Not Immigration Service</div>
+    <div style="font-size:.6rem;color:rgba(243,239,228,.3)">AI Assessment Tool — Not an Immigration Service</div>
   </div>
 </footer>
 
 <script>
-// Reveal on scroll
+// Scroll reveal
 const reveals = document.querySelectorAll('.reveal');
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('vis') });
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('vis'); });
 }, { threshold: 0.07 });
-reveals.forEach(el => obs.observe(el));
+reveals.forEach(el => ro.observe(el));
 
-// Animate bars
+// Animate bar fills
 const bars = document.querySelectorAll('.bfil');
-const bobs = new IntersectionObserver(entries => {
+const bo = new IntersectionObserver(entries => {
   entries.forEach(e => {
-    if(e.isIntersecting) {
+    if(e.isIntersecting){
       const w = e.target.style.width;
       e.target.style.width = '0%';
-      setTimeout(() => { e.target.style.width = w; }, 80);
-      bobs.unobserve(e.target);
+      setTimeout(() => { e.target.style.width = w; }, 100);
+      bo.unobserve(e.target);
     }
   });
 }, { threshold: 0.3 });
-bars.forEach(b => bobs.observe(b));
+bars.forEach(b => bo.observe(b));
 
-// Active nav
-const sects = document.querySelectorAll('section[id], div.psec[id]');
+// Active nav highlight
 const navLinks = document.querySelectorAll('.snav a');
 window.addEventListener('scroll', () => {
   let cur = '';
